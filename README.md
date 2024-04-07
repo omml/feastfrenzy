@@ -1,4 +1,5 @@
-hauntedhouse
+Fest Frenzy
+
 Description
 This is a single player party game written in C++ as part of Week 03 Assignment for the Game Developer bootcamp at The Developer Academy.
 
