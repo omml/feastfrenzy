@@ -2,11 +2,12 @@
 
 ## Description
 This is a single player party game written in C++ as part of Week 03 Assignment for the Game Developer bootcamp at The Developer Academy.
+[Play Buffer](https://github.com/sumo-digital-academy/playbuffer) is used as game engine 
 
 This is a joint project by
 
-Oscar github.com/omml
-Bee
+* Oscar  [github.com/omml](https://github.com/omml)
+* Bee
 
 ### Methodology: Pseudo Code
 We started speaking about ideas of a game with a food fight theme
