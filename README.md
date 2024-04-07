@@ -1,7 +1,8 @@
 # Feast Frenzy
 
 ## Description
-This is a single player party game written in C++ as part of Week 03 Assignment for the Game Developer bootcamp at The Developer Academy.
+This is a single player party game written in C++ as part of Week 03 Assignment for the Game Developer bootcamp at [The Developer Academy](https://www.thedeveloperacademy.com).
+
 [Play Buffer](https://github.com/sumo-digital-academy/playbuffer) is used as game engine 
 
 This is a joint project by
