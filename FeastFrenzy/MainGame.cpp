@@ -1,0 +1,220 @@
+//
+//  MainGame.cpp
+//  Feast Frenzy game
+//
+//  Created by Oscar Martinez on 1/Apr/2024.
+//
+
+#define PLAY_IMPLEMENTATION
+#define PLAY_USING_GAMEOBJECT_MANAGER
+#include "Play.h"
+
+#include "SpritesDefinitions.h"
+#include "CommonDefinitions.h"
+#include "FileNamesHolder.h"
+#include "MainGameObject.h"
+#include "PlayerHandler.h"
+#include "EnemyHandler.h"
+#include "FoodHandler.h"
+#include "ScoreHolder.h"
+
+int DISPLAY_WIDTH = 1280;
+int DISPLAY_HEIGHT = 720;
+int DISPLAY_SCALE = 1;
+
+// Not used at the moment
+struct GameState
+{
+	float timer = 0;
+};
+GameState gameState;
+
+// Background
+MainGameObject background;
+// Score holder
+ScoreHolder score = ScoreHolder();
+// Player handler
+PlayerHandler playerHandler;
+// Enemy handler for left screen enemies
+EnemyHandler enemyHandlerLeft;
+// Food handler for left screen enemies
+FoodHandler foodHandlerLeft;
+// Enemy handler for right screen enemies
+EnemyHandler enemyHandlerRight;
+// Food handler for right screen enemies
+FoodHandler foodHandlerRight;
+
+MenuState guiState = GUI_MAIN;
+bool playingSong = false;
+
+// To change initial backgrounds
+void DisplayGame()
+{
+	switch (guiState)
+	{
+	case GUI_MAIN:
+		// First background
+		background.Display();
+
+		if (Play::KeyPressed(KEY_ENTER))
+		{
+			// Change to second background
+			background.SetSprite(main_gui2, 0.0f);
+			Play::PlayAudio("hit");
+			guiState = GUI_MAIN2;
+		}
+		break;
+	case GUI_MAIN2:
+		// Second background
+		background.Display();
+		
+		if (Play::KeyPressed(KEY_ENTER))
+		{
+			// Change to third background
+			background.SetSprite(main_gui3, 0.0f);
+			Play::PlayAudio("hit");
+			guiState = GUI_MAIN3;
+		}
+		break;
+	case GUI_MAIN3:
+		// Third background
+		background.Display();
+		
+		if (Play::KeyPressed(KEY_ENTER))
+		{
+			// Change to fourth background
+			background.SetSprite(main_gui4, 0.0f);
+			Play::PlayAudio("hit");
+			guiState = GUI_MAIN4;
+		}
+		break;
+	case GUI_MAIN4:
+		// Fourth background
+		background.Display();
+		
+		if (Play::KeyPressed(KEY_TAB))
+		{
+			// For instructions
+			guiState = GUI_INSTRUCTIONS;
+			Play::PlayAudio("hit");
+		}
+		else if (Play::KeyPressed(KEY_SPACE))
+		{
+			Play::PlayAudio("hit");
+			if (playingSong == false)
+			{
+				// To play
+				Play::StartAudioLoop("main");
+				playingSong = true;
+			}
+			guiState = GUI_PLAY;
+		}
+		break;
+	case GUI_INSTRUCTIONS:
+		// Displays instructions
+		Play::DrawFontText("64px", "ARROW KEYS TO MOVE UP, DOWN, LEFT, RIGHT", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 40 }, Play::CENTRE);
+		Play::DrawFontText("64px", "AND SPACE TO CATCH AND THROW", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 40 }, Play::CENTRE);
+		Play::DrawFontText("64px", "PRESS SPACE TO PLAY", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 120 }, Play::CENTRE);
+		Play::PresentDrawingBuffer();
+
+		if (Play::KeyPressed(KEY_SPACE))
+		{
+			Play::PlayAudio("hit");
+			if (playingSong == false)
+			{
+				Play::StartAudioLoop("main");
+				playingSong = true;
+			}
+			guiState = GUI_PLAY;
+		}
+		break;
+	case GUI_PLAY:
+		// Playing mode
+		// Update every game object
+		playerHandler.Display();
+		enemyHandlerLeft.Display();
+		foodHandlerLeft.Display();
+		enemyHandlerRight.Display();
+		foodHandlerRight.Display();
+
+		// Display score and text on top of the screen
+		Play::DrawFontText("64px", "TAB: INSTRUCTIONS", { 0, DISPLAY_HEIGHT - 60 }, Play::LEFT);
+		Play::DrawFontText("64px", "Score: " + std::to_string(score.GetScore()), { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT - 60 }, Play::CENTRE);
+		Play::DrawDebugText({ DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 500 }, "FEAST FRENZY!");
+		Play::PresentDrawingBuffer();
+
+		if (Play::KeyPressed(KEY_TAB))
+		{
+			guiState = GUI_INSTRUCTIONS;
+		}
+		break;
+	}
+}
+
+
+// The entry point for a PlayBuffer program
+void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
+{
+	Play::CreateManager( DISPLAY_WIDTH, DISPLAY_HEIGHT, DISPLAY_SCALE );
+
+	Play::LoadBackground("Data\\Backgrounds\\background.png");
+
+	Play::CentreAllSpriteOrigins();
+
+	// Create background
+	//Play::CreateGameObject(TYPE_BACKGROUND, { 640, 360 }, 0, "main");
+	background = MainGameObject(TYPE_BACKGROUND, main_gui, 640.0f, 360.0f, "main", 0, 1.0f, 0.0f);
+
+	// Creates the player
+	playerHandler.Create();
+
+	// Pass a reference of the player handler so when food items are created
+	// they have a reference of the player if the player catches food
+	foodHandlerLeft.SetPlayerHandler(&playerHandler);
+	// Sets the score object
+	foodHandlerLeft.SetScoreObject(&score);
+	// Food is created before so it can be assigned to an enemy
+	foodHandlerLeft.Create(DIRECTION_LEFT);
+	// Pass a reference of the food handler so when enemies are created 
+	// they have a reference to the food they are carrying
+	enemyHandlerLeft.SetFoodHandler(&foodHandlerLeft);
+	// Create enemies that appear on the left of the screen
+	enemyHandlerLeft.Create(DIRECTION_LEFT);
+
+	// Pass a reference of the player handler so when food items are created
+	// they have a reference of the player if the player catches food
+	foodHandlerRight.SetPlayerHandler(&playerHandler);
+	// Sets the score object
+	foodHandlerRight.SetScoreObject(&score);
+	// Food is created before so it can be assigned to an enemy
+	foodHandlerRight.Create(DIRECTION_RIGHT);
+	// Pass a reference of the food handler so when enemies are created 
+	// they have a reference to the food they are carrying
+	enemyHandlerRight.SetFoodHandler(&foodHandlerRight);
+	// Create enemies that appear on the left of the screen
+	enemyHandlerRight.Create(DIRECTION_RIGHT);
+}
+
+
+// Called by PlayBuffer every frame (60 times a second!)
+bool MainGameUpdate( float elapsedTime )
+{
+	gameState.timer += elapsedTime;
+
+	Play::ClearDrawingBuffer( Play::cOrange );
+	Play::DrawBackground();
+
+	// Display background and game accordingle to menu state
+	DisplayGame();
+
+	Play::PresentDrawingBuffer();
+	return Play::KeyDown( (Play::KeyboardButton)KEY_ESCAPE );
+}
+
+// Gets called once when the player quits the game 
+int MainGameExit( void )
+{
+	Play::DestroyManager();
+	return PLAY_OK;
+}
+
