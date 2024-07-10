@@ -47,106 +47,141 @@ FoodHandler foodHandlerRight;
 MenuState guiState = GUI_MAIN;
 bool playingSong = false;
 
+void DisplayMainScreen()
+{
+	// First background
+	background.Display();
+
+	if (Play::KeyPressed(KEY_ENTER))
+	{
+		// Change to second background
+		background.SetSprite(main_gui2, 0.0f);
+		Play::PlayAudio("hit");
+		guiState = GUI_MAIN2;
+	}
+}
+
+void DisplaySecondScreen()
+{
+	// Second background
+	background.Display();
+
+	if (Play::KeyPressed(KEY_ENTER))
+	{
+		// Change to third background
+		background.SetSprite(main_gui3, 0.0f);
+		Play::PlayAudio("hit");
+		guiState = GUI_MAIN3;
+	}
+}
+
+void DisplayThirdScreen()
+{
+	// Third background
+	background.Display();
+
+	if (Play::KeyPressed(KEY_ENTER))
+	{
+		// Change to fourth background
+		background.SetSprite(main_gui4, 0.0f);
+		Play::PlayAudio("hit");
+		guiState = GUI_MAIN4;
+	}
+}
+
+void DisplayFourthScreen()
+{
+	// Fourth background
+	background.Display();
+
+	if (Play::KeyPressed(KEY_TAB))
+	{
+		// For instructions
+		guiState = GUI_INSTRUCTIONS;
+		Play::PlayAudio("hit");
+	}
+	else if (Play::KeyPressed(KEY_SPACE))
+	{
+		Play::PlayAudio("hit");
+		if (playingSong == false)
+		{
+			// To play
+			Play::StartAudioLoop("main");
+			playingSong = true;
+		}
+		guiState = GUI_PLAY;
+	}
+}
+
+void DisplayInstructions()
+{
+	// Displays instructions
+	Play::DrawFontText("64px", "ARROW KEYS TO MOVE UP, DOWN, LEFT, RIGHT", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 40 }, Play::CENTRE);
+	Play::DrawFontText("64px", "AND SPACE TO CATCH AND THROW", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 40 }, Play::CENTRE);
+	Play::DrawFontText("64px", "PRESS SPACE TO PLAY", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 120 }, Play::CENTRE);
+	Play::PresentDrawingBuffer();
+
+	if (Play::KeyPressed(KEY_SPACE))
+	{
+		Play::PlayAudio("hit");
+		if (playingSong == false)
+		{
+			Play::StartAudioLoop("main");
+			playingSong = true;
+		}
+		guiState = GUI_PLAY;
+	}
+}
+
+void DisplayInGameGUI()
+{
+	// Playing mode
+	// Update every game object
+	playerHandler.Display();
+	enemyHandlerLeft.Display();
+	foodHandlerLeft.Display();
+	enemyHandlerRight.Display();
+	foodHandlerRight.Display();
+
+	// Display score and text on top of the screen
+	Play::DrawFontText("64px", "TAB: INSTRUCTIONS", { 0, DISPLAY_HEIGHT - 60 }, Play::LEFT);
+	Play::DrawFontText("64px", "Score: " + std::to_string(score.GetScore()), { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT - 60 }, Play::CENTRE);
+	Play::DrawDebugText({ DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 500 }, "FEAST FRENZY!");
+	Play::PresentDrawingBuffer();
+
+	if (Play::KeyPressed(KEY_TAB))
+	{
+		guiState = GUI_INSTRUCTIONS;
+	}
+}
+
 // To change initial backgrounds
 void DisplayGame()
 {
 	switch (guiState)
 	{
 	case GUI_MAIN:
-		// First background
-		background.Display();
-
-		if (Play::KeyPressed(KEY_ENTER))
-		{
-			// Change to second background
-			background.SetSprite(main_gui2, 0.0f);
-			Play::PlayAudio("hit");
-			guiState = GUI_MAIN2;
-		}
+		DisplayMainScreen();
 		break;
+
 	case GUI_MAIN2:
-		// Second background
-		background.Display();
-		
-		if (Play::KeyPressed(KEY_ENTER))
-		{
-			// Change to third background
-			background.SetSprite(main_gui3, 0.0f);
-			Play::PlayAudio("hit");
-			guiState = GUI_MAIN3;
-		}
+		DisplaySecondScreen();
 		break;
+
 	case GUI_MAIN3:
-		// Third background
-		background.Display();
-		
-		if (Play::KeyPressed(KEY_ENTER))
-		{
-			// Change to fourth background
-			background.SetSprite(main_gui4, 0.0f);
-			Play::PlayAudio("hit");
-			guiState = GUI_MAIN4;
-		}
+		DisplayThirdScreen();
 		break;
+
 	case GUI_MAIN4:
-		// Fourth background
-		background.Display();
-		
-		if (Play::KeyPressed(KEY_TAB))
-		{
-			// For instructions
-			guiState = GUI_INSTRUCTIONS;
-			Play::PlayAudio("hit");
-		}
-		else if (Play::KeyPressed(KEY_SPACE))
-		{
-			Play::PlayAudio("hit");
-			if (playingSong == false)
-			{
-				// To play
-				Play::StartAudioLoop("main");
-				playingSong = true;
-			}
-			guiState = GUI_PLAY;
-		}
+		DisplayFourthScreen();
 		break;
+
 	case GUI_INSTRUCTIONS:
-		// Displays instructions
-		Play::DrawFontText("64px", "ARROW KEYS TO MOVE UP, DOWN, LEFT, RIGHT", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 40 }, Play::CENTRE);
-		Play::DrawFontText("64px", "AND SPACE TO CATCH AND THROW", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 40 }, Play::CENTRE);
-		Play::DrawFontText("64px", "PRESS SPACE TO PLAY", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 120 }, Play::CENTRE);
-		Play::PresentDrawingBuffer();
-
-		if (Play::KeyPressed(KEY_SPACE))
-		{
-			Play::PlayAudio("hit");
-			if (playingSong == false)
-			{
-				Play::StartAudioLoop("main");
-				playingSong = true;
-			}
-			guiState = GUI_PLAY;
-		}
+		DisplayInstructions();
 		break;
+
 	case GUI_PLAY:
-		// Playing mode
-		// Update every game object
-		playerHandler.Display();
-		enemyHandlerLeft.Display();
-		foodHandlerLeft.Display();
-		enemyHandlerRight.Display();
-		foodHandlerRight.Display();
-
-		// Display score and text on top of the screen
-		Play::DrawFontText("64px", "TAB: INSTRUCTIONS", { 0, DISPLAY_HEIGHT - 60 }, Play::LEFT);
-		Play::DrawFontText("64px", "Score: " + std::to_string(score.GetScore()), { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT - 60 }, Play::CENTRE);
-		Play::DrawDebugText({ DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 500 }, "FEAST FRENZY!");
-		Play::PresentDrawingBuffer();
-
-		if (Play::KeyPressed(KEY_TAB))
-		{
-			guiState = GUI_INSTRUCTIONS;
-		}
+		DisplayInGameGUI();
 		break;
 	}
 }
@@ -162,7 +197,6 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	Play::CentreAllSpriteOrigins();
 
 	// Create background
-	//Play::CreateGameObject(TYPE_BACKGROUND, { 640, 360 }, 0, "main");
 	background = MainGameObject(TYPE_BACKGROUND, main_gui, 640.0f, 360.0f, "main", 0, 1.0f, 0.0f);
 
 	// Creates the player
