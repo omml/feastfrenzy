@@ -193,6 +193,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharacterEnemy.cpp" />
     <ClCompile Include="CharacterPlayer.cpp" />
+    <ClCompile Include="DifficultyHandler.cpp" />
     <ClCompile Include="EnemyHandler.cpp" />
     <ClCompile Include="FileNamesHolder.cpp" />
     <ClCompile Include="Food.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="CharacterEnemy.h" />
     <ClInclude Include="CharacterPlayer.h" />
     <ClInclude Include="CommonDefinitions.h" />
+    <ClInclude Include="DifficultyHandler.h" />
     <ClInclude Include="EnemyHandler.h" />
     <ClInclude Include="FileNamesHolder.h" />
     <ClInclude Include="Food.h" />

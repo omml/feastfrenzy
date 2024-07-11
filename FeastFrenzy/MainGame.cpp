@@ -18,6 +18,7 @@
 #include "FoodHandler.h"
 #include "ScoreHolder.h"
 #include "HealthBar.h"
+#include "DifficultyHandler.h"
 
 int DISPLAY_WIDTH = 1280;
 int DISPLAY_HEIGHT = 720;
@@ -46,6 +47,8 @@ FoodHandler foodHandlerLeft;
 EnemyHandler enemyHandlerRight;
 // Food handler for right screen enemies
 FoodHandler foodHandlerRight;
+// Difficulty handler;
+DifficultyHandler difficulty = DifficultyHandler();
 // Main song audio id;
 int songId;
 
@@ -152,9 +155,10 @@ void DisplayInGameGUI()
 		foodHandlerRight.Display();
 		playerHealthBar.Display();
 
-		// Display score and text on top of the screen
-		Play::DrawFontText("64px", "TAB: INSTRUCTIONS", { 0, DISPLAY_HEIGHT - 60 }, Play::LEFT);
-		Play::DrawFontText("64px", "Score: " + std::to_string(score.GetScore()), { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT - 60 }, Play::CENTRE);
+		// Display score, level and text on top of the screen
+		Play::DrawFontText("64px", "TAB: HELP", { 0, DISPLAY_HEIGHT - 60 }, Play::LEFT);
+		Play::DrawFontText("64px", "Score: " + std::to_string(score.GetScore()), { DISPLAY_WIDTH / 2 - 150, DISPLAY_HEIGHT - 60 }, Play::CENTRE);
+		Play::DrawFontText("64px", "Level: " + std::to_string(difficulty.GetLevel()), { DISPLAY_WIDTH / 2 + 150, DISPLAY_HEIGHT - 60 }, Play::CENTRE);
 		Play::DrawDebugText({ DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 500 }, "FEAST FRENZY!");
 		Play::PresentDrawingBuffer();
 
@@ -178,6 +182,7 @@ void ReStartGame()
 	enemyHandlerRight.ReStart();
 	playerHandler.ReStart();
 	background.SetSprite(main_gui, 0.0f);
+	difficulty.ReStart();
 }
 
 // Displays game over
@@ -272,6 +277,8 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	enemyHandlerLeft.SetFoodHandler(&foodHandlerLeft);
 	// Create enemies that appear on the left of the screen
 	enemyHandlerLeft.Create(DIRECTION_LEFT);
+	// Set the difficulty handler object
+	enemyHandlerLeft.SetDifficultyHandler(&difficulty);
 
 	// Pass a reference of the player handler so when food items are created
 	// they have a reference of the player if the player catches food
@@ -287,6 +294,11 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	enemyHandlerRight.SetFoodHandler(&foodHandlerRight);
 	// Create enemies that appear on the left of the screen
 	enemyHandlerRight.Create(DIRECTION_RIGHT);
+	// Set the difficulty handler object
+	enemyHandlerRight.SetDifficultyHandler(&difficulty);
+
+	// Sets the score object
+	difficulty.SetScoreHolderObject(&score);
 }
 
 
@@ -300,6 +312,9 @@ bool MainGameUpdate( float elapsedTime )
 
 	// Display background and game accordingle to menu state
 	DisplayGame();
+
+	// Check if it needs to increase difficulty
+	difficulty.CheckDifficulty();
 
 	Play::PresentDrawingBuffer();
 	return Play::KeyDown( (Play::KeyboardButton)KEY_ESCAPE );

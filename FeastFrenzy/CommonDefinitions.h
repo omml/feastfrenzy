@@ -119,4 +119,14 @@ struct SpriteNameHolder
 	float _moveSpeed;
 };
 
+enum DifficultyLevel
+{
+	LEVEL01 = 1,
+	LEVEL02,
+	LEVEL03,
+	LEVEL04,
+	LEVEL05,
+	LEVEL06,
+};
+
 #endif

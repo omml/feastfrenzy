@@ -10,6 +10,7 @@
 #include "SpritesDefinitions.h"
 #include "CharacterEnemy.h"
 #include "FoodHandler.h"
+#include "DifficultyHandler.h"
 
 EnemyHandler::EnemyHandler()
 {
@@ -20,6 +21,12 @@ EnemyHandler::EnemyHandler()
 void EnemyHandler::SetFoodHandler(FoodHandler* foodHandler)
 {
 	_foodHandler = foodHandler;
+}
+
+// Sets the food handler to pass references of food to the enemies
+void EnemyHandler::SetDifficultyHandler(DifficultyHandler* difficultyHandler)
+{
+	_difficultyHandler = difficultyHandler;
 }
 
 // Returns enemy depending on index
@@ -161,7 +168,9 @@ void EnemyHandler::Create(int screenPosition)
 // checks the state to restart enemies
 void EnemyHandler::Display()
 {
-	for (int i = 0; i < NUM_ENEMIES; i++)
+	int loopLimit = _difficultyHandler->GetNumEnemies();
+
+	for (int i = 0; i < loopLimit; i++)
 	{
 		// If enemy is out of the screen and food as well
 		// of if enemy is out of screen and food was catched

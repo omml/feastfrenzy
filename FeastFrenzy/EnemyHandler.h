@@ -10,12 +10,14 @@
 
 #include "CommonDefinitions.h"
 #include "CharacterEnemy.h"
+#include "DifficultyHandler.h"
 
 class FoodHandler;
 
 class EnemyHandler
 {
-public:
+private:
+	DifficultyHandler* _difficultyHandler;
 	CharacterEnemy _enemies[NUM_ENEMIES];
 	ObjectDirection _originalDirection[NUM_ENEMIES];
 	int _states[4];
@@ -28,9 +30,11 @@ public:
 	float _posYMax;
 	FoodHandler* _foodHandler;
 
+public:
 	EnemyHandler();
 	
 	void SetFoodHandler(FoodHandler* foodHandler);
+	void SetDifficultyHandler(DifficultyHandler* difficultyHandler);
 	
 	CharacterEnemy* GetEnemy(int index);
 	
