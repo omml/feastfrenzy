@@ -108,7 +108,7 @@ enum MenuState
 	GUI_MAIN4,
 	GUI_INSTRUCTIONS,
 	GUI_PLAY,
-	GUI_DEAD,
+	GUI_GAMEOVER,
 };
 
 // To hold names of sprites, animation and moving speed

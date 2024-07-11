@@ -136,26 +136,55 @@ void DisplayInstructions()
 	}
 }
 
+// Displays GUI during game
 void DisplayInGameGUI()
 {
-	// Playing mode
-	// Update every game object
-	playerHandler.Display();
-	enemyHandlerLeft.Display();
-	foodHandlerLeft.Display();
-	enemyHandlerRight.Display();
-	foodHandlerRight.Display();
-	playerHealthBar.Display();
+	if (playerHealthBar.IsAlive())
+	{
+		// Playing mode
+		// Update every game object
+		playerHandler.Display();
+		enemyHandlerLeft.Display();
+		foodHandlerLeft.Display();
+		enemyHandlerRight.Display();
+		foodHandlerRight.Display();
+		playerHealthBar.Display();
 
-	// Display score and text on top of the screen
-	Play::DrawFontText("64px", "TAB: INSTRUCTIONS", { 0, DISPLAY_HEIGHT - 60 }, Play::LEFT);
-	Play::DrawFontText("64px", "Score: " + std::to_string(score.GetScore()), { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT - 60 }, Play::CENTRE);
-	Play::DrawDebugText({ DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 500 }, "FEAST FRENZY!");
+		// Display score and text on top of the screen
+		Play::DrawFontText("64px", "TAB: INSTRUCTIONS", { 0, DISPLAY_HEIGHT - 60 }, Play::LEFT);
+		Play::DrawFontText("64px", "Score: " + std::to_string(score.GetScore()), { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT - 60 }, Play::CENTRE);
+		Play::DrawDebugText({ DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 500 }, "FEAST FRENZY!");
+		Play::PresentDrawingBuffer();
+
+		if (Play::KeyPressed(KEY_TAB))
+		{
+			guiState = GUI_INSTRUCTIONS;
+		}
+	}
+	else
+	{
+		guiState = GUI_GAMEOVER;
+	}
+}
+
+// Displays game over
+void DisplayGameOverGUI()
+{
+	// Displays instructions
+	Play::DrawFontText("64px", "GAME OVER", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 260 }, Play::CENTRE);
+	Play::DrawFontText("64px", "TRAIN YOUR CATCHING AND THROWING SKILLS", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 }, Play::CENTRE);
+	Play::DrawFontText("64px", "PRESS SPACE TO MAIN SCREEN", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 140 }, Play::CENTRE);
 	Play::PresentDrawingBuffer();
 
-	if (Play::KeyPressed(KEY_TAB))
+	if (Play::KeyPressed(KEY_SPACE))
 	{
-		guiState = GUI_INSTRUCTIONS;
+		Play::PlayAudio("hit");
+		if (playingSong == false)
+		{
+			Play::StartAudioLoop("main");
+			playingSong = true;
+		}
+		guiState = GUI_MAIN;
 	}
 }
 
@@ -186,6 +215,9 @@ void DisplayGame()
 
 	case GUI_PLAY:
 		DisplayInGameGUI();
+		break;
+	case GUI_GAMEOVER:
+		DisplayGameOverGUI();
 		break;
 	}
 }
