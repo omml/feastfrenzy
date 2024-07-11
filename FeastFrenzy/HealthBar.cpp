@@ -29,6 +29,13 @@ HealthBar::HealthBar(float maxHealth, float decreasePrecentage)
 	_decreaseStep = _maxHealth * _decreasePercentage;
 }
 
+void HealthBar::ReStart()
+{
+	_currentHealth = _maxHealth;
+	_healthScale = 1.0f;
+	CalculateTransformMatrix();
+}
+
 void HealthBar::Create()
 {
 	_posX = 1135+29;

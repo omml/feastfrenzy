@@ -37,6 +37,8 @@ public:
 	void Create(int screenPosition);
 	
 	void Display();
+
+	void ReStart();
 	
 };
 #endif

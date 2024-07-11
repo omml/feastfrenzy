@@ -46,6 +46,8 @@ FoodHandler foodHandlerLeft;
 EnemyHandler enemyHandlerRight;
 // Food handler for right screen enemies
 FoodHandler foodHandlerRight;
+// Main song audio id;
+int songId;
 
 MenuState guiState = GUI_MAIN;
 bool playingSong = false;
@@ -109,7 +111,7 @@ void DisplayFourthScreen()
 		if (playingSong == false)
 		{
 			// To play
-			Play::StartAudioLoop("main");
+			songId = Play::StartAudioLoop("main");
 			playingSong = true;
 		}
 		guiState = GUI_PLAY;
@@ -129,7 +131,7 @@ void DisplayInstructions()
 		Play::PlayAudio("hit");
 		if (playingSong == false)
 		{
-			Play::StartAudioLoop("main");
+			songId = Play::StartAudioLoop("main");
 			playingSong = true;
 		}
 		guiState = GUI_PLAY;
@@ -167,11 +169,23 @@ void DisplayInGameGUI()
 	}
 }
 
+// Restart all objects
+void ReStartGame()
+{
+	playerHealthBar.ReStart();
+	score.ReStart();
+	enemyHandlerLeft.ReStart();
+	enemyHandlerRight.ReStart();
+	playerHandler.ReStart();
+	background.SetSprite(main_gui, 0.0f);
+}
+
 // Displays game over
 void DisplayGameOverGUI()
 {
 	// Displays instructions
 	Play::DrawFontText("64px", "GAME OVER", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 260 }, Play::CENTRE);
+	Play::DrawFontText("64px", "FINAL SCORE: " + std::to_string(score.GetScore()), {DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 130}, Play::CENTRE);
 	Play::DrawFontText("64px", "TRAIN YOUR CATCHING AND THROWING SKILLS", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 }, Play::CENTRE);
 	Play::DrawFontText("64px", "PRESS SPACE TO MAIN SCREEN", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 140 }, Play::CENTRE);
 	Play::PresentDrawingBuffer();
@@ -179,11 +193,14 @@ void DisplayGameOverGUI()
 	if (Play::KeyPressed(KEY_SPACE))
 	{
 		Play::PlayAudio("hit");
-		if (playingSong == false)
+		if (playingSong == true)
 		{
-			Play::StartAudioLoop("main");
-			playingSong = true;
+			Play::StopAudioLoop(songId);
+			playingSong = false;
 		}
+
+		ReStartGame();
+
 		guiState = GUI_MAIN;
 	}
 }

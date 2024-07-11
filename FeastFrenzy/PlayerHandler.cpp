@@ -32,3 +32,9 @@ void PlayerHandler::Display()
 	// Move player depending on keyboard input
 	player.HandlePlayerControls();
 }
+
+// Restarts the player
+void PlayerHandler::ReStart()
+{
+	player.ReStart();
+}

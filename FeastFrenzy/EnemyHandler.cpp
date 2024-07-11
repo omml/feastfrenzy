@@ -187,3 +187,20 @@ void EnemyHandler::Display()
 	}
 }
 
+void EnemyHandler::ReStart()
+{
+	for (int i = 0; i < NUM_ENEMIES; i++)
+	{
+		// Set initial position
+		_enemies[i].SetVelDir(_originalDirection[i], 3.5f, 0.5f);
+		// Set initial state
+		_enemies[i].SetAnimationState(PLAYER_STATE_WALK_HOLD);
+		// Set initial limits
+		_enemies[i].SetLimits(_posXMax, 0.0f);
+		// Set original direction
+		_enemies[i].SetCurrentDirection(_originalDirection[i]);
+		// Restart, set a flag if enemy's food was catched
+		_enemies[i].ReStart(_originalDirection[i], true);
+	}
+}
+

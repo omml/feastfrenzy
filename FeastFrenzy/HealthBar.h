@@ -16,6 +16,7 @@ public:
 	void Display();
 	void DecreaseHealth();
 	bool IsAlive();
+	void ReStart();
 private:
 	MainGameObject _background;
 	MainGameObject _main;

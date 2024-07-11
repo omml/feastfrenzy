@@ -23,5 +23,7 @@ public:
 	void Create();
 
 	void Display();
+
+	void ReStart();
 };
 #endif

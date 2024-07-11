@@ -21,6 +21,8 @@ protected:
 	ObjectDirection _oldDirection;
 	bool _animationFinished;
 	SingleSpriteState _spriteState;
+	float _iniPosX;
+	float _iniPosY;
 
 public:
 	MainGameObject();
@@ -81,6 +83,8 @@ public:
 	// When we change the direction of the game object	we need to change
 	// the sprite
 	void DisplayChangeDir(int sprite, ObjectDirection dir, float moveSpeed, float animSpeed);
+
+	void ReStart();
 };
 #endif
 

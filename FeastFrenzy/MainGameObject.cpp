@@ -24,6 +24,9 @@ MainGameObject::MainGameObject()
 // Creates a gameobject and sets its sprite reade to be displayed
 MainGameObject::MainGameObject(GameObjectType go_type, int sprite, float posX, float posY, const char name[], int colRad, float scale, float animSpeed)
 {
+	// Stores initial position for when game is restarted
+	_iniPosX = posX;
+	_iniPosY = posY;
 	// Sets the gameobject type
 	_gameObjectType = go_type;
 	// Creates the Play Buffer object
@@ -43,6 +46,9 @@ MainGameObject::MainGameObject(GameObjectType go_type, int sprite, float posX, f
 // Creates a gameobject and sets its sprite reade to be displayed, sets velocity
 MainGameObject::MainGameObject(GameObjectType go_type, int sprite, float posX, float posY, float velX, float velY, const char name[], int colRad, float scale, float animSpeed)
 {
+	// Stores initial position for when game is restarted
+	_iniPosX = posX;
+	_iniPosY = posY;
 	// Sets the gameobject type
 	_gameObjectType = go_type;
 	// Creates the Play Buffer object
@@ -57,6 +63,19 @@ MainGameObject::MainGameObject(GameObjectType go_type, int sprite, float posX, f
 	obj.scale = scale;
 	obj.velocity = { velX, velY };
 	Play::SetSprite(obj, FileNamesHolder::fileNames[sprite], animSpeed);
+}
+
+void MainGameObject::ReStart()
+{
+	// Sets intial values
+	_currentDirection = DIRECTION_DOWN;
+	_oldDirection = DIRECTION_DOWN;
+	_animationFinished = false;
+	_spriteState = SPRITE_STATE_FINISHED;
+
+	Play::GameObject& obj = Play::GetGameObject(_gameObjectId);
+	obj.pos = { _iniPosX, _iniPosY };
+	obj.velocity = { 0.f, 0.f };
 }
 
 // Gets object's current direction

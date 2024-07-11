@@ -12,6 +12,12 @@ ScoreHolder::ScoreHolder()
 	_score = 0;
 }
 
+// Resets score
+void ScoreHolder::ReStart()
+{
+	_score = 0;
+}
+
 // Gets the current score
 int ScoreHolder::GetScore()
 {

@@ -16,5 +16,6 @@ public:
 	int GetScore();
 	void IncScore();
 	void DecScore();
+	void ReStart();
 };
 #endif
