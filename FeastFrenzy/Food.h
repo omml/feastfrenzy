@@ -10,6 +10,7 @@
 
 #include "MainGameObject.h"
 #include "ScoreHolder.h"
+#include "HealthBar.h"
 
 class CharacterEnemy;
 class CharacterPlayer;
@@ -29,6 +30,7 @@ protected:
 	CharacterPlayer* _player;
 
 	ScoreHolder* _score;
+	HealthBar* _healthBar;
 
 public:
 	Food();
@@ -52,6 +54,7 @@ public:
 	void ReStart();
 
 	void SetScoreObject(ScoreHolder* score);
+	void SetHealthBarObject(HealthBar* healthBar);
 
 	FoodState GetState();
 

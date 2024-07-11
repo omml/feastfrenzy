@@ -193,6 +193,13 @@ void MainGameObject::Display(float animSpeed)
 	Play::DrawObjectRotated(obj);
 }
 
+void MainGameObject::DisplayHorizontallyScaled(const Play::Matrix2D& transformMatrix)
+{
+	Play::GameObject& obj = Play::GetGameObject(_gameObjectId);
+
+	Play::DrawSpriteTransformed(obj.spriteId, transformMatrix, 0);
+}
+
 // Changes the sprite of the game object, sets its animation speed and displays it
 void MainGameObject::DisplayChangeSprite(int sprite, float animSpeed)
 {
@@ -206,6 +213,14 @@ void MainGameObject::DisplayChangeSprite(int sprite, float animSpeed)
 
 	Play::UpdateGameObject(obj);
 	Play::DrawObjectRotated(obj);
+}
+
+//Get the size of the sprite
+Play::Vector2f MainGameObject::GetSpriteSize()
+{
+	Play::GameObject& obj = Play::GetGameObject(_gameObjectId);
+
+	return Play::Graphics::GetSpriteSize(obj.spriteId);
 }
 
 // Displays a game object with the last assigned sprite and properties

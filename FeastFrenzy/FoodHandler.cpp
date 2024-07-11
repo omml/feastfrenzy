@@ -24,10 +24,16 @@ Food* FoodHandler::GetFood(int index)
 	return &_food[index];
 }
 
-// Sets a reference to the score object to increase or decrease depending on who is hit
+// Sets a reference to the score object to increase score
 void FoodHandler::SetScoreObject(ScoreHolder* score)
 {
 	_score = score;
+}
+
+// Sets a reference to the score object to decrease depending health
+void FoodHandler::SetHealthBarObject(HealthBar* healthBar)
+{
+	_healthBar = healthBar;
 }
 
 // Creates all food items, one for each enemy
@@ -46,6 +52,8 @@ void FoodHandler::Create(ObjectDirection dir)
 		_food[i].SetPlayer(_playerHandler->GetPlayer());
 		// Sets the score object
 		_food[i].SetScoreObject(_score);
+		// Sets the healthbar object
+		_food[i].SetHealthBarObject(_healthBar);
 	}
 }
 

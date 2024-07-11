@@ -97,6 +97,7 @@ enum GameObjectType
 	TYPE_FOOD_START = 200,
 	TYPE_FOOD_END = 216,
 	TYPE_BACKGROUND,
+	TYPE_HEALTHBAR,
 };
 
 enum MenuState

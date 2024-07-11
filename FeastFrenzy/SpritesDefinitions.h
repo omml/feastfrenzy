@@ -16,6 +16,7 @@ gm1_cd_3, gm1_cl_3, gm1_cr_3, gm1_cu_3, gm1_pd_3, gm1_pl_3, gm1_pr_3, gm1_pu_3, 
 f_bk_n, f_dn_n, f_hb_n, f_me_n, f_ms_n, f_pk_n, f_pz_n, f_tm_n,
 mou1_d, mou1_l, mou1_u, mou1_wd_4, mou1_wl_4, mou1_wr_4, mou1_wu_4,
 exp26_b_16, exp27_b_16, exp28_b_16, exp29_b_16, exp30_b_16, exp31_b_16, exp32_b_16,
-main_gui, main_gui2, main_gui3, main_gui4
+main_gui, main_gui2, main_gui3, main_gui4,
+healthbar_bg, healthbar_guide, healthbar_main
 };
 #endif

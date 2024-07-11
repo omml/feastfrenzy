@@ -10,6 +10,7 @@
 #include "CharacterEnemy.h"
 #include "CharacterPlayer.h"
 #include "SpritesDefinitions.h"
+#include "HealthBar.h"
 
 // Main class for Food items
 Food::Food() : MainGameObject()
@@ -42,6 +43,12 @@ FoodState Food::GetState()
 void Food::SetScoreObject(ScoreHolder* score)
 {
 	_score = score;
+}
+
+// Sets reference to the health bar object
+void Food::SetHealthBarObject(HealthBar* healthbar)
+{
+	_healthBar = healthbar;
 }
 
 // Restart the food, 
@@ -263,8 +270,8 @@ void Food::Animate()
 			}
 			else
 			{
-				// Decreases the score as player was hit
-				_score->DecScore();
+				// Decreases the health bar as player was hit
+				_healthBar->DecreaseHealth();
 
 				Display();
 				// Prepare to display the splat animation

@@ -17,6 +17,7 @@
 #include "EnemyHandler.h"
 #include "FoodHandler.h"
 #include "ScoreHolder.h"
+#include "HealthBar.h"
 
 int DISPLAY_WIDTH = 1280;
 int DISPLAY_HEIGHT = 720;
@@ -31,6 +32,8 @@ GameState gameState;
 
 // Background
 MainGameObject background;
+// Health bar
+HealthBar playerHealthBar = HealthBar(10.f,.1f);
 // Score holder
 ScoreHolder score = ScoreHolder();
 // Player handler
@@ -142,6 +145,7 @@ void DisplayInGameGUI()
 	foodHandlerLeft.Display();
 	enemyHandlerRight.Display();
 	foodHandlerRight.Display();
+	playerHealthBar.Display();
 
 	// Display score and text on top of the screen
 	Play::DrawFontText("64px", "TAB: INSTRUCTIONS", { 0, DISPLAY_HEIGHT - 60 }, Play::LEFT);
@@ -199,6 +203,9 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	// Create background
 	background = MainGameObject(TYPE_BACKGROUND, main_gui, 640.0f, 360.0f, "main", 0, 1.0f, 0.0f);
 
+	// Creates healthbar
+	playerHealthBar.Create();
+
 	// Creates the player
 	playerHandler.Create();
 
@@ -207,6 +214,8 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	foodHandlerLeft.SetPlayerHandler(&playerHandler);
 	// Sets the score object
 	foodHandlerLeft.SetScoreObject(&score);
+	// Sets the health bar object
+	foodHandlerLeft.SetHealthBarObject(&playerHealthBar);
 	// Food is created before so it can be assigned to an enemy
 	foodHandlerLeft.Create(DIRECTION_LEFT);
 	// Pass a reference of the food handler so when enemies are created 
@@ -220,6 +229,8 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	foodHandlerRight.SetPlayerHandler(&playerHandler);
 	// Sets the score object
 	foodHandlerRight.SetScoreObject(&score);
+	// Sets the health bar object
+	foodHandlerRight.SetHealthBarObject(&playerHealthBar);
 	// Food is created before so it can be assigned to an enemy
 	foodHandlerRight.Create(DIRECTION_RIGHT);
 	// Pass a reference of the food handler so when enemies are created 

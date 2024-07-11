@@ -8,6 +8,7 @@
 #ifndef MAINGAMEOBJECT_H
 #define MAINGAMEOBJECT_H
 #define PLAY_USING_GAMEOBJECT_MANAGER
+#include "Play.h"
 #include "CommonDefinitions.h"
 
 // Main class to create and display game objects
@@ -60,6 +61,12 @@ public:
 	
 	// Displays a game object with the last assigned sprite and properties
 	void Display();
+
+	// Displays a game object horizontally scaled, used for healthbar
+	
+	void DisplayHorizontallyScaled(const Play::Matrix2D& transformMatrix);
+
+	Play::Vector2f GetSpriteSize();
 	
 	// Displays a game object reseting frame, animSpeed and velosity to zero
 	void DisplayStop();
