@@ -27,8 +27,8 @@ private:
 	float _decreasePercentage;
 	float _decreaseStep;
 
-	int _posX;
-	int _posY;
+	float _posX;
+	float _posY;
 	Play::Matrix2D _matrix;
 	float _mainScale;
 	float _healthScale;

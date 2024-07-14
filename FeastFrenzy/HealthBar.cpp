@@ -42,7 +42,7 @@ void HealthBar::Create()
 	_posY = 656;
 	_mainScale = 0.125f;
 	_healthScale = 1.f;
-	_background = MainGameObject(TYPE_HEALTHBAR, healthbar_bg, _posX - 29, _posY + 4, FileNamesHolder::fileNames[healthbar_bg], 0, 0.125f, 0.f);
+	_background = MainGameObject(TYPE_HEALTHBAR, healthbar_bg, _posX - 29.0f, _posY + 4.0f, FileNamesHolder::fileNames[healthbar_bg], 0, 0.125f, 0.f);
 	_main = MainGameObject(TYPE_HEALTHBAR, healthbar_main, _posX, _posY, FileNamesHolder::fileNames[healthbar_main], 0, _mainScale, 0.f);
 	_guide = MainGameObject(TYPE_HEALTHBAR, healthbar_guide, _posX - 29, _posY + 4, FileNamesHolder::fileNames[healthbar_guide], 0, 0.125f, 0.f);
 

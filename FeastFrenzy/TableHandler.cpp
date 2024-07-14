@@ -56,8 +56,8 @@ void TableHandler::Create(float xMin, float xMax, float yMin, float yMax)
 	for (int i = 0; i < NUM_TABLES; i++)
 	{
 		// Select girl or granma
-		float posX = Play::RandomRollRange(_posXMin, _posXMax);
-		float posY = Play::RandomRollRange(_posYMin, _posYMax);
+		float posX = (float)Play::RandomRollRange((int)_posXMin, (int)_posXMax);
+		float posY = (float)Play::RandomRollRange((int)_posYMin, (int)_posYMax);
 
 		// Create the enemy
 		_tables[i] = Table(TYPE_TABLE, table, posX, posY, "table", 10, 1.f, 0.f);

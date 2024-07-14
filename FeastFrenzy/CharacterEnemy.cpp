@@ -120,7 +120,9 @@ void CharacterEnemy::LaunchFood()
 // When enemy as thrown food and disapeared it comes back in a different position 
 void CharacterEnemy::ChangeInitPosition()
 {
-	float xPosIni, yPosIni,posXMin,posXMax,posYMin,posYMax;
+	float xPosIni, yPosIni, posXMin, posXMax, posYMin, posYMax;
+	xPosIni = 0.f;
+	yPosIni = 0.f;
 
 	switch (_screenSide)
 	{
