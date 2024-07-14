@@ -8,6 +8,8 @@
 #include "Play.h"
 #include "CharacterPlayer.h"
 #include "CommonDefinitions.h"
+#include "SpritesDefinitions.h"
+#include "FileNamesHolder.h"
 
 
 CharacterPlayer::CharacterPlayer()
@@ -19,6 +21,10 @@ CharacterPlayer::CharacterPlayer(GameObjectType go_type, int sprite, float posX,
 	Character(go_type, sprite, posX, posY, name, colRad, scale, animSpeed)
 {
 	_catched = false;
+
+	_colliderYOffset = 50;
+
+	_colliderId = Play::CreateGameObject(TYPE_PLAYER_COLLIDER, { posX, posY + _colliderYOffset }, 15, FileNamesHolder::fileNames[playercollider]);
 }
 
 void CharacterPlayer::SetTableHandler(TableHandler* tableHandler)
@@ -122,6 +128,14 @@ void CharacterPlayer::CheckObjectsInPlayingArea()
 	}
 }
 
+void CharacterPlayer::DisplayCollider()
+{
+	Play::GameObject& player = Play::GetGameObject(_gameObjectId);
+	Play::GameObject& collider = Play::GetGameObject(_colliderId);
+
+	collider.pos = { player.pos.x, player.pos.y + _colliderYOffset };
+}
+
 // Returns the current animation state
 PlayerAnimationState CharacterPlayer::GetAnimationState()
 {
@@ -159,6 +173,8 @@ void CharacterPlayer::HandlePlayerControls()
 	CheckPlayingArea();
 
 	CheckObjectsInPlayingArea();
+
+	DisplayCollider();
 
 	switch (_animationState)
 	{

@@ -18,6 +18,8 @@ private:
 	bool _catched;
 	Food* _food;
 	TableHandler* _tableHandler;
+	int _colliderId;
+	int _colliderYOffset;
 public:
 	CharacterPlayer();
 
@@ -26,6 +28,8 @@ public:
 	void CheckPlayingArea();
 
 	void CheckObjectsInPlayingArea();
+
+	void DisplayCollider();
 
 	int GetKeyDown();
 

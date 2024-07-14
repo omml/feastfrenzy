@@ -19,5 +19,6 @@ exp26_b_16, exp27_b_16, exp28_b_16, exp29_b_16, exp30_b_16, exp31_b_16, exp32_b_
 main_gui, main_gui2, main_gui3, main_gui4,
 healthbar_bg, healthbar_guide, healthbar_main,
 table,
+playercollider,
 };
 #endif

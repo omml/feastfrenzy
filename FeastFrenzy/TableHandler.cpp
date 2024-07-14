@@ -60,7 +60,7 @@ void TableHandler::Create(float xMin, float xMax, float yMin, float yMax)
 		float posY = Play::RandomRollRange(_posYMin, _posYMax);
 
 		// Create the enemy
-		_tables[i] = Table(TYPE_TABLE, table, posX, posY, "gm", 10, 1.f, 0.f);
+		_tables[i] = Table(TYPE_TABLE, table, posX, posY, "table", 10, 1.f, 0.f);
 			
 		// Each enemy is associated with a food object, the food object changes sprite
 		//_foodHandler->GetFood(i)->SetEnemy(&_enemies[i]);

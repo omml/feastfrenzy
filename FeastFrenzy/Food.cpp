@@ -201,7 +201,7 @@ bool Food::IsCollidingWithPlayer()
 	if (_fromPlayer == false)
 	{
 		Play::GameObject& food = Play::GetGameObject(_gameObjectId);
-		Play::GameObject& player = Play::GetGameObjectByType(TYPE_BOY_P);
+		Play::GameObject& player = Play::GetGameObjectByType(TYPE_PLAYER_COLLIDER);
 
 		//check if the food and the player are colliding
 		if (Play::IsColliding(food, player))
