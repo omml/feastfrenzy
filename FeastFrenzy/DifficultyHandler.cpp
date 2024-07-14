@@ -11,13 +11,7 @@ DifficultyHandler::DifficultyHandler()
 {
 	_level = LEVEL01;
 }
-/*
-DifficultyHandler& DifficultyHandler::getInstance()
-{
-	static DifficultyHandler instance;
-	return instance;
-}
-*/
+
 int DifficultyHandler::GetLevel()
 {
 	return (int)_level;
@@ -66,6 +60,35 @@ void DifficultyHandler::CheckDifficulty()
 }
 
 int DifficultyHandler::GetNumEnemies()
+{
+	int retVal = 0;
+
+	switch (_level)
+	{
+	case LEVEL01:
+		retVal = 1;
+		break;
+	case LEVEL02:
+		retVal = 2;
+		break;
+	case LEVEL03:
+		retVal = 3;
+		break;
+	case LEVEL04:
+		retVal = 3;
+		break;
+	case LEVEL05:
+		retVal = 3;
+		break;
+	case LEVEL06:
+		retVal = 3;
+		break;
+	}
+
+	return retVal;
+}
+
+int DifficultyHandler::GetNumTables()
 {
 	int retVal = 0;
 

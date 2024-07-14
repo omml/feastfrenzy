@@ -16,8 +16,6 @@ private:
 	ScoreHolder* _score;
 
 public:
-	//static DifficultyHandler& getInstance();
-
 	DifficultyHandler();
 
 	void SetScoreHolderObject(ScoreHolder* s);
@@ -27,6 +25,8 @@ public:
 	void CheckDifficulty();
 
 	int GetNumEnemies();
+
+	int GetNumTables();
 
 	int GetLevel();
 };

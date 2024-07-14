@@ -65,6 +65,11 @@ MainGameObject::MainGameObject(GameObjectType go_type, int sprite, float posX, f
 	Play::SetSprite(obj, FileNamesHolder::fileNames[sprite], animSpeed);
 }
 
+int MainGameObject::GetObjectId()
+{
+	return _gameObjectId;
+}
+
 void MainGameObject::ReStart()
 {
 	// Sets intial values

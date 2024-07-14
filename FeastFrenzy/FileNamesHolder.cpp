@@ -15,6 +15,7 @@ const char FileNamesHolder::fileNames[][20] = {
     "mou1_d","mou1_l","mou1_u","mou1_wd_4","mou1_wl_4","mou1_wr_4","mou1_wu_4",
     "exp26_b_16", "exp27_b_16", "exp28_b_16", "exp29_b_16", "exp30_b_16", "exp31_b_16", "exp32_b_16",
     "main_gui", "main_gui2", "main_gui3", "main_gui4",
-    "healthbar_bg", "healthbar_guide", "healthbar_main"
+    "healthbar_bg", "healthbar_guide", "healthbar_main",
+    "table"
 };
 

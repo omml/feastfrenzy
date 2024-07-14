@@ -36,6 +36,8 @@ public:
 	void SetSprite(int sprite, float animSpeed);
 
 	ObjectDirection GetCurrentDirection();
+
+	int GetObjectId();
 	
 	// Gets the position in one axis given by dir parameter
 	float GetPosition(ObjectDirection dir);

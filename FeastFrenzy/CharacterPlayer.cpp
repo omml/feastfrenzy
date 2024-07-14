@@ -21,6 +21,11 @@ CharacterPlayer::CharacterPlayer(GameObjectType go_type, int sprite, float posX,
 	_catched = false;
 }
 
+void CharacterPlayer::SetTableHandler(TableHandler* tableHandler)
+{
+	_tableHandler = tableHandler;
+}
+
 // Function to get user input
 int CharacterPlayer::GetKeyDown()
 {
@@ -76,6 +81,47 @@ void CharacterPlayer::CheckPlayingArea()
 	}
 }
 
+// Function to check that the player keeps in the rectangle in the middle
+void CharacterPlayer::CheckObjectsInPlayingArea()
+{
+	Play::GameObject& player = Play::GetGameObject(_gameObjectId);
+
+	Play::Vector2f playerSize = GetSpriteSize();
+
+	int numTables = _tableHandler->GetNumTables();
+
+	for (int i = 0; i < numTables; i++)
+	{
+		Table* t = _tableHandler->GetTable(i);
+
+		Play::GameObject& table = Play::GetGameObject(t->GetObjectId());
+
+		//check if the food and the player are colliding
+		if (Play::IsColliding(table, player))
+		{
+			Play::Vector2f tableSize = t->GetSpriteSize();
+
+			switch (_currentDirection)
+			{
+			case DIRECTION_RIGHT:
+				player.pos = { table.pos.x - 30.f, player.pos.y };
+				break;
+			case DIRECTION_LEFT:
+				player.pos = { table.pos.x + 30.f, player.pos.y };
+				break;
+			case DIRECTION_UP:
+				player.pos = { player.pos.x,  table.pos.y - 30.f };
+				break;
+			case DIRECTION_DOWN:
+				player.pos = { player.pos.x,  table.pos.y + 30.f };
+				break;
+			}
+
+			break;
+		}
+	}
+}
+
 // Returns the current animation state
 PlayerAnimationState CharacterPlayer::GetAnimationState()
 {
@@ -111,6 +157,8 @@ void CharacterPlayer::HandlePlayerControls()
 	_oldDirection = _currentDirection;
 
 	CheckPlayingArea();
+
+	CheckObjectsInPlayingArea();
 
 	switch (_animationState)
 	{

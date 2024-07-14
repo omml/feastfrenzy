@@ -205,8 +205,11 @@
     </ClCompile>
     <ClCompile Include="MainGameObject.cpp" />
     <ClCompile Include="PlayerHandler.cpp" />
+    <ClCompile Include="RenderHandler.cpp" />
     <ClCompile Include="ScoreHolder.cpp" />
     <ClCompile Include="Splat.cpp" />
+    <ClCompile Include="Table.cpp" />
+    <ClCompile Include="TableHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Play.h" />
@@ -222,9 +225,12 @@
     <ClInclude Include="HealthBar.h" />
     <ClInclude Include="MainGameObject.h" />
     <ClInclude Include="PlayerHandler.h" />
+    <ClInclude Include="RenderHandler.h" />
     <ClInclude Include="ScoreHolder.h" />
     <ClInclude Include="Splat.h" />
     <ClInclude Include="SpritesDefinitions.h" />
+    <ClInclude Include="Table.h" />
+    <ClInclude Include="TableHandler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

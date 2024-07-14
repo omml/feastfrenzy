@@ -14,11 +14,19 @@ CharacterPlayer* PlayerHandler::GetPlayer()
 	return &player;
 }
 
+// Sets the table handler
+void PlayerHandler::SetTableHandler(TableHandler* tableHandler)
+{
+	_tableHandler = tableHandler;
+
+	player.SetTableHandler(_tableHandler);
+}
+
 // Creates the player
 void PlayerHandler::Create()
 {
 	// Create the main player
-	player = CharacterPlayer(TYPE_BOY_P, boy1_wd_8, 300, 300, "boy", 45, 0.5f, 0.0f);
+	player = CharacterPlayer(TYPE_BOY_P, boy1_wd_8, 300, 300, "boy", 10, 0.5f, 0.0f);
 	// Set the sprites 
 	player.SetWalkSprites(boy1_wu_8, boy1_wd_8, boy1_wl_8, boy1_wr_8, 3.5f, 0.5f);
 	player.SetWalkHoldSprites(boy1_wuh_8, boy1_wdh_8, boy1_wlh_8, boy1_wrh_8, 3.5f, 0.5f);
@@ -31,6 +39,11 @@ void PlayerHandler::Display()
 {
 	// Move player depending on keyboard input
 	player.HandlePlayerControls();
+}
+
+int PlayerHandler::GetObjectId()
+{
+	return player.GetObjectId();
 }
 
 // Restarts the player

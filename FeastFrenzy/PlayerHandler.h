@@ -13,6 +13,9 @@
 // Class to create the food
 class PlayerHandler
 {
+private:
+	TableHandler* _tableHandler;
+
 public:
 	CharacterPlayer player;
 
@@ -22,8 +25,12 @@ public:
 
 	void Create();
 
+	void SetTableHandler(TableHandler* tableHandler);
+
 	void Display();
 
 	void ReStart();
+
+	int GetObjectId();
 };
 #endif

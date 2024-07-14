@@ -128,7 +128,7 @@ void Food::DisplayCarriedPosition()
 		}
 		else
 		{
-			food.pos = { posX, posY + 40.0f };
+			food.pos = { posX, posY + 65.0f };
 		}
 		break;
 	case DIRECTION_DOWN:
@@ -138,7 +138,7 @@ void Food::DisplayCarriedPosition()
 		}
 		else
 		{
-			food.pos = { posX, posY + 30.0f };
+			food.pos = { posX, posY + 55.0f };
 		}
 		break;
 	case DIRECTION_RIGHT:
@@ -148,7 +148,7 @@ void Food::DisplayCarriedPosition()
 		}
 		else
 		{
-			food.pos = { posX + 12.5f, posY + 35.0f };
+			food.pos = { posX + 12.5f, posY + 60.0f };
 		}
 		break;
 	case DIRECTION_LEFT:
@@ -158,7 +158,7 @@ void Food::DisplayCarriedPosition()
 		}
 		else
 		{
-			food.pos = { posX - 12.5f, posY + 35.0f };
+			food.pos = { posX - 12.5f, posY + 60.0f };
 		}
 		break;
 	}

@@ -15,12 +15,14 @@
 EnemyHandler::EnemyHandler()
 {
 	_foodHandler = nullptr;
+	_difficultyHandler = nullptr;
 }
 
 // Sets the food handler to pass references of food to the enemies
 void EnemyHandler::SetFoodHandler(FoodHandler* foodHandler)
 {
 	_foodHandler = foodHandler;
+	_difficultyHandler = nullptr;
 }
 
 // Sets the food handler to pass references of food to the enemies

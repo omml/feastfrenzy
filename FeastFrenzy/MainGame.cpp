@@ -19,6 +19,8 @@
 #include "ScoreHolder.h"
 #include "HealthBar.h"
 #include "DifficultyHandler.h"
+#include "TableHandler.h"
+#include "RenderHandler.h"
 
 int DISPLAY_WIDTH = 1280;
 int DISPLAY_HEIGHT = 720;
@@ -49,6 +51,10 @@ EnemyHandler enemyHandlerRight;
 FoodHandler foodHandlerRight;
 // Difficulty handler;
 DifficultyHandler difficulty = DifficultyHandler();
+// Table handler
+TableHandler tableHandler;
+// Render handler for table and player objects
+RenderHandler renderHandler;
 // Main song audio id;
 int songId;
 
@@ -148,12 +154,13 @@ void DisplayInGameGUI()
 	{
 		// Playing mode
 		// Update every game object
-		playerHandler.Display();
+		renderHandler.Render();
 		enemyHandlerLeft.Display();
 		foodHandlerLeft.Display();
 		enemyHandlerRight.Display();
 		foodHandlerRight.Display();
 		playerHealthBar.Display();
+		
 
 		// Display score, level and text on top of the screen
 		Play::DrawFontText("64px", "TAB: HELP", { 0, DISPLAY_HEIGHT - 60 }, Play::LEFT);
@@ -183,6 +190,7 @@ void ReStartGame()
 	playerHandler.ReStart();
 	background.SetSprite(main_gui, 0.0f);
 	difficulty.ReStart();
+	tableHandler.ReStart();
 }
 
 // Displays game over
@@ -299,6 +307,15 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 
 	// Sets the score object
 	difficulty.SetScoreHolderObject(&score);
+
+	// Create tables
+	tableHandler.Create(150.f, 1125.0f, 128.0f, 475.f);
+	tableHandler.SetDifficultyHandler(&difficulty);
+	playerHandler.SetTableHandler(&tableHandler);
+
+	// Set render handler
+	renderHandler.SetPlayerHandler(&playerHandler);
+	renderHandler.SetTableHandler(&tableHandler);
 }
 
 

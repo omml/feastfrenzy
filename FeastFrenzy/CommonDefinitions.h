@@ -11,6 +11,7 @@
 //Common definitions
 
 #define NUM_ENEMIES 3
+#define NUM_TABLES 3
 
 // To indicate the direction game objects are pointing to
 enum ObjectDirection
@@ -96,8 +97,9 @@ enum GameObjectType
 	TYPE_ENEMY_END = 116,
 	TYPE_FOOD_START = 200,
 	TYPE_FOOD_END = 216,
-	TYPE_BACKGROUND,
-	TYPE_HEALTHBAR,
+	TYPE_BACKGROUND = 1000,
+	TYPE_HEALTHBAR = 1001,
+	TYPE_TABLE = 1002,
 };
 
 enum MenuState
