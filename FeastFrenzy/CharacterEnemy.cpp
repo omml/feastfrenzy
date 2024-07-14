@@ -11,6 +11,8 @@
 
 CharacterEnemy::CharacterEnemy()
 {
+	_food = nullptr;
+	_screenSide = DIRECTION_DOWN;
 	_offset = 0;
 	_enemyState = ENEMY_INIT;
 	_xLimit = 0.0f;
@@ -22,6 +24,7 @@ CharacterEnemy::CharacterEnemy()
 CharacterEnemy::CharacterEnemy(GameObjectType go_type, int sprite, float posX, float posY, const char name[], int colRad, float scale, float animSpeed, ObjectDirection screenSide, int offset) :
 	Character(go_type, sprite, posX, posY, name, colRad, scale, animSpeed)
 {
+	_food = nullptr;
 	_screenSide = screenSide;
 	_offset = offset;
 	_enemyState = ENEMY_INIT;

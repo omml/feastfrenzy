@@ -15,6 +15,10 @@
 CharacterPlayer::CharacterPlayer()
 {
 	_catched = false;
+	_colliderId = -1;
+	_colliderYOffset = 50;
+	_food = nullptr;
+	_tableHandler = nullptr;
 }
 
 CharacterPlayer::CharacterPlayer(GameObjectType go_type, int sprite, float posX, float posY, const char name[], int colRad, float scale, float animSpeed) :
@@ -25,6 +29,9 @@ CharacterPlayer::CharacterPlayer(GameObjectType go_type, int sprite, float posX,
 	_colliderYOffset = 50;
 
 	_colliderId = Play::CreateGameObject(TYPE_PLAYER_COLLIDER, { posX, posY + _colliderYOffset }, 15, FileNamesHolder::fileNames[playercollider]);
+
+	_food = nullptr;
+	_tableHandler = nullptr;
 }
 
 void CharacterPlayer::SetTableHandler(TableHandler* tableHandler)
@@ -77,13 +84,13 @@ void CharacterPlayer::CheckPlayingArea()
 	{
 		obj.pos = { 150.0f, obj.pos.y };
 	}
-	if (obj.pos.y > 510.0f)
+	if (obj.pos.y > 470.0f)
 	{
-		obj.pos = { obj.pos.x, 510.0f };
+		obj.pos = { obj.pos.x, 470.0f };
 	}
-	if (obj.pos.y < 140.0f)
+	if (obj.pos.y < 80.0f)
 	{
-		obj.pos = { obj.pos.x, 140.0f };
+		obj.pos = { obj.pos.x, 80.0f };
 	}
 }
 

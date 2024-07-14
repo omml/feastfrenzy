@@ -35,6 +35,8 @@ GameState gameState;
 
 // Background
 MainGameObject background;
+// Table rows at bottom
+MainGameObject bottomTables;
 // Health bar
 HealthBar playerHealthBar = HealthBar(10.f,.1f);
 // Score holder
@@ -160,8 +162,10 @@ void DisplayInGameGUI()
 		enemyHandlerRight.Display();
 		foodHandlerRight.Display();
 		playerHealthBar.Display();
-		
 
+		// Display bottom tables
+		bottomTables.Display();
+		
 		// Display score, level and text on top of the screen
 		Play::DrawFontText("64px", "TAB: HELP", { 0, DISPLAY_HEIGHT - 60 }, Play::LEFT);
 		Play::DrawFontText("64px", "Score: " + std::to_string(score.GetScore()), { DISPLAY_WIDTH / 2 - 150, DISPLAY_HEIGHT - 60 }, Play::CENTRE);
@@ -264,6 +268,8 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 
 	// Create background
 	background = MainGameObject(TYPE_BACKGROUND, main_gui, 640.0f, 360.0f, "main", 0, 1.0f, 0.0f);
+
+	bottomTables = MainGameObject(TYPE_EXTRA_SCENERY, extrascenery, 636.0f, 77.0f, "extrascenery", 0, 1.0f, 0.0f);
 
 	// Creates healthbar
 	playerHealthBar.Create();

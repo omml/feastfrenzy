@@ -20,5 +20,6 @@ main_gui, main_gui2, main_gui3, main_gui4,
 healthbar_bg, healthbar_guide, healthbar_main,
 table,
 playercollider,
+extrascenery,
 };
 #endif

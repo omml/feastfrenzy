@@ -18,5 +18,6 @@ const char FileNamesHolder::fileNames[][20] = {
     "healthbar_bg", "healthbar_guide", "healthbar_main",
     "table",
     "playercollider",
+    "extrascenery",
 };
 
