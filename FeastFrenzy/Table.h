@@ -24,5 +24,7 @@ public:
 	void Display() override;
 
 	void ReStart(float x, float y);
+
+	void TimerToResetCake(int durationInSeconds);
 };
 

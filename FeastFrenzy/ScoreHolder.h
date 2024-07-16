@@ -15,6 +15,7 @@ public:
 	ScoreHolder();
 	int GetScore();
 	void IncScore();
+	void IncScore(int value);
 	void DecScore();
 	void ReStart();
 };

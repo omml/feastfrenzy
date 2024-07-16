@@ -18,6 +18,7 @@ private:
 	bool _catched;
 	Food* _food;
 	TableHandler* _tableHandler;
+	ScoreHolder* _score;
 	int _colliderId;
 	int _colliderYOffset;
 public:
@@ -43,6 +44,7 @@ public:
 
 	void LaunchFood();
 
+	void SetScoreObject(ScoreHolder* score);
 	void SetTableHandler(TableHandler* tableHandler);
 
 	bool PutOnTable();

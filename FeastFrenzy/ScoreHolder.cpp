@@ -30,6 +30,12 @@ void ScoreHolder::IncScore()
 	_score++;
 }
 
+// Increases the score by given ammount
+void ScoreHolder::IncScore(int value)
+{
+	_score += value;
+}
+
 // Decreases the score
 void ScoreHolder::DecScore()
 {

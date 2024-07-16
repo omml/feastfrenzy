@@ -313,6 +313,7 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 
 	// Sets the score object
 	difficulty.SetScoreHolderObject(&score);
+	playerHandler.SetScoreObject(&score);
 
 	// Create tables
 	tableHandler.Create(150.f, 1125.0f, 128.0f, 475.f);

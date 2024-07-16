@@ -38,6 +38,12 @@ bool Table::IsCollidingWithPlayer(int playerId)
 void Table::SetCake(bool val)
 {
 	_hasCake = val;
+
+	if (_hasCake == true)
+	{
+		std::thread timerThread(std::bind(&Table::TimerToResetCake, this, 5.0f));
+		timerThread.detach(); // Detach the thread to run independently
+	}
 }
 
 // Returns whether the table has a cake on top
@@ -64,4 +70,12 @@ void Table::ReStart(float x, float y)
 	SetPosition(x, y);
 	_collider.SetPosition(x, y);
 	_cake.SetPosition(x, y + 40.f);
+}
+
+// Hide the cake and produce a sound
+void Table::TimerToResetCake(int durationInSeconds)
+{
+	std::this_thread::sleep_for(std::chrono::seconds(durationInSeconds));
+	SetCake(false);
+	Play::PlayAudio("cakedisappear");
 }

@@ -53,7 +53,7 @@ void DifficultyHandler::CheckDifficulty()
 		break;
 	}
 
-	if (_score->GetScore() == threshold)
+	if (_score->GetScore() >= threshold)
 	{
 		_level = (DifficultyLevel)((int)_level + 1);
 	}
