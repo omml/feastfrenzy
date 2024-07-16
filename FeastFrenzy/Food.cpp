@@ -243,12 +243,14 @@ bool Food::IsCollidingWithEnemies()
 {
 	bool retVal = false;
 
-	if (_fromPlayer == true)
-	{
-		Play::GameObject& food = Play::GetGameObject(_gameObjectId);
+	GameObjectType enemyGameObjectType = _enemy->GetGameObjectType();
 
-		// Loop trough all players 
-		for (int i = TYPE_ENEMY_START; i < TYPE_ENEMY_END; i++)
+	Play::GameObject& food = Play::GetGameObject(_gameObjectId);
+
+	// Loop trough all players 
+	for (int i = TYPE_ENEMY_START; i < TYPE_ENEMY_END; i++)
+	{
+		if (i != enemyGameObjectType)
 		{
 			Play::GameObject& enemy = Play::GetGameObjectByType(i);
 
@@ -310,8 +312,11 @@ void Food::Animate()
 		}
 		else if (IsCollidingWithEnemies())
 		{
-			// Increases the score as player hit an enemy
-			_score->IncScore();
+			if (_fromPlayer == true)
+			{
+				// Increases the score as player hit an enemy
+				_score->IncScore();
+			}
 
 			Display();
 			// Prepare to display the splat animation

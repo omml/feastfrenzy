@@ -38,6 +38,8 @@ public:
 	ObjectDirection GetCurrentDirection();
 
 	int GetObjectId();
+
+	GameObjectType GetGameObjectType();
 	
 	// Gets the position in one axis given by dir parameter
 	float GetPosition(ObjectDirection dir);

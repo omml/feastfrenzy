@@ -71,6 +71,12 @@ int MainGameObject::GetObjectId()
 	return _gameObjectId;
 }
 
+// Returns game object type
+GameObjectType MainGameObject::GetGameObjectType()
+{
+	return _gameObjectType;
+}
+
 // Sets game object position
 void MainGameObject::SetPosition(float x, float y)
 {
