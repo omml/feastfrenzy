@@ -8,8 +8,21 @@
 #include "MainGameObject.h"
 class Table : public MainGameObject
 {
+private:
+	MainGameObject _collider;
+	MainGameObject _cake;
+	bool _hasCake;
+
 public:
 	Table();
 	Table(GameObjectType go_type, int sprite, float posX, float posY, const char name[], int colRad, float scale, float animSpeed);
+	bool IsCollidingWithPlayer(int playerId);
+
+	void SetCake(bool val);
+	bool HasCake();
+
+	void Display() override;
+
+	void ReStart(float x, float y);
 };
 

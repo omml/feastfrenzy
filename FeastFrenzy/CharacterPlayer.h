@@ -44,5 +44,7 @@ public:
 	void LaunchFood();
 
 	void SetTableHandler(TableHandler* tableHandler);
+
+	bool PutOnTable();
 };
 #endif

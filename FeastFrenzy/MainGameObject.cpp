@@ -65,11 +65,21 @@ MainGameObject::MainGameObject(GameObjectType go_type, int sprite, float posX, f
 	Play::SetSprite(obj, FileNamesHolder::fileNames[sprite], animSpeed);
 }
 
+// Returns Frame Buffer game object ID
 int MainGameObject::GetObjectId()
 {
 	return _gameObjectId;
 }
 
+// Sets game object position
+void MainGameObject::SetPosition(float x, float y)
+{
+	Play::GameObject& obj = Play::GetGameObject(_gameObjectId);
+
+	obj.pos = { x, y };
+}
+
+// Reset object
 void MainGameObject::ReStart()
 {
 	// Sets intial values

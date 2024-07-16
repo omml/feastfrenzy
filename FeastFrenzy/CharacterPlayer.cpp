@@ -171,6 +171,35 @@ void CharacterPlayer::LaunchFood()
 	_food->Throw(_currentDirection, 7.5f, true);
 }
 
+// Function to simulate putting cake on the table
+bool CharacterPlayer::PutOnTable()
+{
+	bool retVal = false;
+
+	if (_food->IsCake() == true)
+	{
+		int numTables = _tableHandler->GetNumTables();
+
+		for (int i = 0; i < numTables; i++)
+		{
+			Table* table = _tableHandler->GetTable(i);
+
+			if (table->HasCake() == false)
+			{
+				if (table->IsCollidingWithPlayer(_gameObjectId))
+				{
+					retVal = true;
+					table->SetCake(true);
+					_food->SetIdle();
+					break;
+				}
+			}
+		}
+	}
+
+	return retVal;
+}
+
 // This function has the state machine for the player
 void CharacterPlayer::HandlePlayerControls()
 {
@@ -368,10 +397,16 @@ void CharacterPlayer::HandlePlayerControls()
 		DisplaySingleSpriteAnimation(_throwSprites[_currentDirection]._spriteName, _throwSprites[_currentDirection]._animSpeed, 3);
 		// Changes the state to let do the throwing animation
 		_animationState = PLAYER_STATE_ATTACK;
-		//Sets velocity to the food so it launches
-		LaunchFood();
-		// Play throw sound
-		Play::PlayAudio("throw");
+
+		// Check if food could be put on table
+		if(PutOnTable() == false)
+		{
+			//Sets velocity to the food so it launches
+			LaunchFood();
+			// Play throw sound
+			Play::PlayAudio("throw");
+		}
+
 		break;
 	case PLAYER_STATE_ATTACK:
 		// Display the throw animation and wait for it to finish

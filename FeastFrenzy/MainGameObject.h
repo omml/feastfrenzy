@@ -64,10 +64,9 @@ public:
 	void DisplayChangeSprite(int sprite, float animSpeed);
 	
 	// Displays a game object with the last assigned sprite and properties
-	void Display();
+	virtual void Display();
 
 	// Displays a game object horizontally scaled, used for healthbar
-	
 	void DisplayHorizontallyScaled(const Play::Matrix2D& transformMatrix);
 
 	Play::Vector2f GetSpriteSize();
@@ -85,6 +84,8 @@ public:
 	// When we change the direction of the game object	we need to change
 	// the sprite
 	void DisplayChangeDir(int sprite, ObjectDirection dir, float moveSpeed, float animSpeed);
+
+	void SetPosition(float x, float y);
 
 	void ReStart();
 };

@@ -32,6 +32,8 @@ protected:
 	ScoreHolder* _score;
 	HealthBar* _healthBar;
 
+	bool _isCake;
+
 public:
 	Food();
 
@@ -61,5 +63,8 @@ public:
 	bool IsCollidingWithPlayer();
 
 	bool IsCollidingWithEnemies();
+
+	bool IsCake();
+	void SetIdle();
 };
 #endif

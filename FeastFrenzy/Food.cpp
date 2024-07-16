@@ -31,12 +31,27 @@ Food::Food(GameObjectType go_type, int sprite, float posX, float posY, const cha
 	_enemy = nullptr;
 	_player = nullptr;
 	_score = nullptr;
+
+	// Check if food is cake
+	if (sprite == f_bk_n)
+	{
+		_isCake = true;
+	}
+	else
+	{
+		_isCake = false;
+	}
 }
 
 // Returns food's state
 FoodState Food::GetState()
 {
 	return _state;
+}
+
+bool Food::IsCake()
+{
+	return _isCake;
 }
 
 // Sets reference to the score object
@@ -56,6 +71,16 @@ void Food::ReStart()
 {
 	// Selects a random sprite
 	int r = Play::RandomRollRange(f_bk_n, f_tm_n);
+
+	// Check if food is cake
+	if (r == f_bk_n)
+	{
+		_isCake = true;
+	}
+	else
+	{
+		_isCake = false;
+	}
 
 	// Sets the sprite
 	SetSprite(r, 0.0f);
@@ -239,6 +264,11 @@ bool Food::IsCollidingWithEnemies()
 	return retVal;
 }
 
+void Food::SetIdle()
+{
+	_state = FOOD_IDLE;
+}
+
 // Handle food animation depending on state
 void Food::Animate()
 {
@@ -314,6 +344,9 @@ void Food::Animate()
 		}
 		break;
 	case FOOD_IDLE:
+		break;
+	case FOOD_ON_TABLE:
+		Display();
 		break;
 	}
 }

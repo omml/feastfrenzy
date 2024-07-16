@@ -55,7 +55,7 @@ void TableHandler::Create(float xMin, float xMax, float yMin, float yMax)
 	//Create enemies
 	for (int i = 0; i < NUM_TABLES; i++)
 	{
-		// Select girl or granma
+		// Find random position
 		float posX = (float)Play::RandomRollRange((int)_posXMin, (int)_posXMax);
 		float posY = (float)Play::RandomRollRange((int)_posYMin, (int)_posYMax);
 
@@ -80,11 +80,16 @@ void TableHandler::Display()
 	}
 }
 
+// Restart the tables
 void TableHandler::ReStart()
 {
 	for (int i = 0; i < NUM_ENEMIES; i++)
 	{
-		_tables[i].ReStart();
+		// Find random position
+		float posX = (float)Play::RandomRollRange((int)_posXMin, (int)_posXMax);
+		float posY = (float)Play::RandomRollRange((int)_posYMin, (int)_posYMax);
+
+		_tables[i].ReStart(posX, posY);
 	}
 }
 
