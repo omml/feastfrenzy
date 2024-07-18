@@ -52,7 +52,7 @@ void TableHandler::Create(float xMin, float xMax, float yMin, float yMax)
 	_posYMin = yMin;
 	_posYMax = yMax;
 	
-	//Create enemies
+	//Create tables
 	for (int i = 0; i < NUM_TABLES; i++)
 	{
 		// Find random position
@@ -61,10 +61,6 @@ void TableHandler::Create(float xMin, float xMax, float yMin, float yMax)
 
 		// Create the enemy
 		_tables[i] = Table(TYPE_TABLE, table, posX, posY, "table", 10, 1.f, 0.f);
-			
-		// Each enemy is associated with a food object, the food object changes sprite
-		//_foodHandler->GetFood(i)->SetEnemy(&_enemies[i]);
-		//_enemies[i].SetFood(_foodHandler->GetFood(i));
 	}
 }
 
@@ -83,7 +79,7 @@ void TableHandler::Display()
 // Restart the tables
 void TableHandler::ReStart()
 {
-	for (int i = 0; i < NUM_ENEMIES; i++)
+	for (int i = 0; i < NUM_TABLES; i++)
 	{
 		// Find random position
 		float posX = (float)Play::RandomRollRange((int)_posXMin, (int)_posXMax);

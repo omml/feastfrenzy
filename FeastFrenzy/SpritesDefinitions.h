@@ -21,5 +21,6 @@ healthbar_bg, healthbar_guide, healthbar_main,
 table,
 playercollider,
 extrascenery,
+smoke_appear_7,
 };
 #endif

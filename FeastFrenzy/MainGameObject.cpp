@@ -36,6 +36,7 @@ MainGameObject::MainGameObject(GameObjectType go_type, int sprite, float posX, f
 	_oldDirection = DIRECTION_DOWN;
 	_animationFinished = false;
 	_spriteState = SPRITE_STATE_FINISHED;
+	_iniAnimSpeed = animSpeed;
 
 	// Sets scale and sprite
 	Play::GameObject& obj = Play::GetGameObject(_gameObjectId);
@@ -83,6 +84,9 @@ void MainGameObject::SetPosition(float x, float y)
 	Play::GameObject& obj = Play::GetGameObject(_gameObjectId);
 
 	obj.pos = { x, y };
+
+	_iniPosX = x;
+	_iniPosY = y;
 }
 
 // Reset object
@@ -97,6 +101,28 @@ void MainGameObject::ReStart()
 	Play::GameObject& obj = Play::GetGameObject(_gameObjectId);
 	obj.pos = { _iniPosX, _iniPosY };
 	obj.velocity = { 0.f, 0.f };
+}
+
+// Reset animation finished
+void MainGameObject::ResetAnimationFinished()
+{
+	Play::GameObject& obj = Play::GetGameObject(_gameObjectId);
+	
+	obj.framePos = 0.0f;
+	obj.frame = 0;
+	obj.animSpeed = _iniAnimSpeed;
+
+	Play::UpdateGameObject(obj);
+	
+	_animationFinished = false;
+}
+
+// Returns the animation frame position
+float MainGameObject::GetFramePosition()
+{
+	Play::GameObject& obj = Play::GetGameObject(_gameObjectId);
+
+	return obj.framePos;
 }
 
 // Gets object's current direction

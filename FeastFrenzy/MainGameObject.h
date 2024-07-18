@@ -23,6 +23,7 @@ protected:
 	SingleSpriteState _spriteState;
 	float _iniPosX;
 	float _iniPosY;
+	float _iniAnimSpeed = 0.f;
 
 public:
 	MainGameObject();
@@ -87,7 +88,14 @@ public:
 	// the sprite
 	void DisplayChangeDir(int sprite, ObjectDirection dir, float moveSpeed, float animSpeed);
 
+	// Sets game oject position
 	void SetPosition(float x, float y);
+
+	// Resets the animation
+	void ResetAnimationFinished();
+
+	// Gets the animation frame position
+	float GetFramePosition();
 
 	virtual void ReStart();
 };

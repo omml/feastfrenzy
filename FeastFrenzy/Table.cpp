@@ -18,6 +18,7 @@ Table::Table(GameObjectType go_type, int sprite, float posX, float posY, const c
 	_hasCake = false;
 	_collider = MainGameObject(TYPE_TABLE_COLLIDER, playercollider, posX, posY, FileNamesHolder::fileNames[playercollider], 30.f, 1.0f, 0.0f);
 	_cake = MainGameObject(TYPE_CAKE_ON_TABLE, f_bk_n, posX, posY + 40.f, FileNamesHolder::fileNames[f_bk_n], 0.f, .75f, 0.0f);
+	_smoke = MainGameObject(TYPE_CAKE_ON_TABLE, smoke_appear_7, posX, posY + 20.0f, FileNamesHolder::fileNames[smoke_appear_7], 0.f, 0.15f, 0.1f);
 }
 
 // Function to check if player is in range to place cake
@@ -60,6 +61,17 @@ void Table::Display()
 	{
 		_cake.Display();
 	}
+
+	if (_playedAppearSound == false)
+	{
+		_playedAppearSound = true;
+		Play::PlayAudio("appear");
+	}
+
+	if (_smoke.GetAnimationFinished() == false)
+	{
+		_smoke.DisplayAnimStop(7);
+	}
 }
 
 // Restarts the table hiding the cake
@@ -70,6 +82,9 @@ void Table::ReStart(float x, float y)
 	SetPosition(x, y);
 	_collider.SetPosition(x, y);
 	_cake.SetPosition(x, y + 40.f);
+	_smoke.SetPosition(x, y + 20.0f);
+	_smoke.ResetAnimationFinished();
+	_playedAppearSound = false;
 }
 
 // Hide the cake and produce a sound

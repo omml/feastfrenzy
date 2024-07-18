@@ -11,7 +11,9 @@ class Table : public MainGameObject
 private:
 	MainGameObject _collider;
 	MainGameObject _cake;
-	bool _hasCake;
+	MainGameObject _smoke;
+	bool _hasCake = false;
+	bool _playedAppearSound = false;
 
 public:
 	Table();
