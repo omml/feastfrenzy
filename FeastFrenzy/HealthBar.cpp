@@ -38,13 +38,13 @@ void HealthBar::ReStart()
 
 void HealthBar::Create()
 {
-	_posX = 1135+29;
-	_posY = 656;
-	_mainScale = 0.125f;
+	_posX = 1135+23;
+	_posY = 680;
+	_mainScale = 0.1f;
 	_healthScale = 1.f;
-	_background = MainGameObject(TYPE_HEALTHBAR, healthbar_bg, _posX - 29.0f, _posY + 4.0f, FileNamesHolder::fileNames[healthbar_bg], 0, 0.125f, 0.f);
+	_background = MainGameObject(TYPE_HEALTHBAR, healthbar_bg, _posX - 23.0f, _posY + 3.0f, FileNamesHolder::fileNames[healthbar_bg], 0, _mainScale, 0.f);
 	_main = MainGameObject(TYPE_HEALTHBAR, healthbar_main, _posX, _posY, FileNamesHolder::fileNames[healthbar_main], 0, _mainScale, 0.f);
-	_guide = MainGameObject(TYPE_HEALTHBAR, healthbar_guide, _posX - 29, _posY + 4, FileNamesHolder::fileNames[healthbar_guide], 0, 0.125f, 0.f);
+	//_guide = MainGameObject(TYPE_HEALTHBAR, healthbar_guide, _posX - 23.0f, _posY + 3.0f, FileNamesHolder::fileNames[healthbar_guide], 0, _mainScale, 0.f);
 
 	_spriteSize = _main.GetSpriteSize() * _mainScale;
 
@@ -109,5 +109,5 @@ void HealthBar::Display()
 	_main.DisplayHorizontallyScaled(_matrix);
 
 	_background.Display();
-	//guide.Display();
+	//_guide.Display();
 }

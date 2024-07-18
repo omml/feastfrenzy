@@ -21,7 +21,7 @@ public:
 private:
 	MainGameObject _background;
 	MainGameObject _main;
-	MainGameObject _guide;
+	//MainGameObject _guide;
 
 	float _maxHealth;
 	float _currentHealth;
