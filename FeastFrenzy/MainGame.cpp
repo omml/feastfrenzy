@@ -133,10 +133,10 @@ void DisplayInstructions()
 {
 	string s = FileNamesHolder::foodNames[playerHandler.GetHealthFood()];
 	// Displays instructions
-	Play::DrawFontText("64px", "ARROW KEYS TO MOVE UP, DOWN, LEFT, RIGHT", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 40 }, Play::CENTRE);
-	Play::DrawFontText("64px", "PRESS SPACE TO CATCH AND THROW", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 40 }, Play::CENTRE);
-	Play::DrawFontText("64px", "PRESS E TO EAT " + s, { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 120 }, Play::CENTRE);
-	Play::DrawFontText("64px", "PRESS SPACE TO PLAY", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 200 }, Play::CENTRE);
+	Play::DrawFontText("40px", "Press ARROW keys to MOVE UP, DOWN, LEFT, RIGHT", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 100 }, Play::CENTRE);
+	Play::DrawFontText("40px", "Press SPACE to CATCH and THROW", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 20 }, Play::CENTRE);
+	Play::DrawFontText("40px", "Press E to EAT " + s, { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 60 }, Play::CENTRE);
+	Play::DrawFontText("40px", "Press SPACE to PLAY", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 140 }, Play::CENTRE);
 	Play::PresentDrawingBuffer();
 
 	if (Play::KeyPressed(KEY_SPACE))
@@ -169,10 +169,10 @@ void DisplayInGameGUI()
 		bottomTables.Display();
 		
 		// Display score, level and text on top of the screen
-		Play::DrawFontText("64px", "TAB: HELP", { 0, DISPLAY_HEIGHT - 60 }, Play::LEFT);
-		Play::DrawFontText("64px", "Score: " + std::to_string(score.GetScore()), { DISPLAY_WIDTH / 2 - 150, DISPLAY_HEIGHT - 60 }, Play::CENTRE);
-		Play::DrawFontText("64px", "Level: " + std::to_string(difficulty.GetLevel()), { DISPLAY_WIDTH / 2 + 150, DISPLAY_HEIGHT - 60 }, Play::CENTRE);
-		Play::DrawDebugText({ DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 500 }, "FEAST FRENZY!");
+		Play::DrawFontText("40px", "TAB: Help", { 0, DISPLAY_HEIGHT - 40 }, Play::LEFT);
+		Play::DrawFontText("40px", "Score: " + std::to_string(score.GetScore()), { DISPLAY_WIDTH / 2 - 150, DISPLAY_HEIGHT - 40 }, Play::CENTRE);
+		Play::DrawFontText("40px", "Level: " + std::to_string(difficulty.GetLevel()), { DISPLAY_WIDTH / 2 + 150, DISPLAY_HEIGHT - 40 }, Play::CENTRE);
+		
 		Play::PresentDrawingBuffer();
 
 		if (Play::KeyPressed(KEY_TAB))
@@ -203,10 +203,10 @@ void ReStartGame()
 void DisplayGameOverGUI()
 {
 	// Displays instructions
-	Play::DrawFontText("64px", "GAME OVER", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 260 }, Play::CENTRE);
-	Play::DrawFontText("64px", "FINAL SCORE: " + std::to_string(score.GetScore()), {DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 130}, Play::CENTRE);
-	Play::DrawFontText("64px", "TRAIN YOUR CATCHING AND THROWING SKILLS", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 }, Play::CENTRE);
-	Play::DrawFontText("64px", "PRESS SPACE TO MAIN SCREEN", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 140 }, Play::CENTRE);
+	Play::DrawFontText("40px", "Game Over", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 260 }, Play::CENTRE);
+	Play::DrawFontText("40px", "Final Score: " + std::to_string(score.GetScore()), {DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 130}, Play::CENTRE);
+	Play::DrawFontText("40px", "Train your catching and throwing skills", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 }, Play::CENTRE);
+	Play::DrawFontText("40px", "Press SPACE to MAIN SCREEN", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 140 }, Play::CENTRE);
 	Play::PresentDrawingBuffer();
 
 	if (Play::KeyPressed(KEY_SPACE))
