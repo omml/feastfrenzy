@@ -41,6 +41,14 @@ Food::Food(GameObjectType go_type, int sprite, float posX, float posY, const cha
 	{
 		_isCake = false;
 	}
+
+	_foodIndex = sprite - f_bk_n;
+}
+
+// Returns food index to dsiplay name
+int Food::GetFoodIndex()
+{
+	return _foodIndex;
 }
 
 // Returns food's state
@@ -71,6 +79,9 @@ void Food::ReStart()
 {
 	// Selects a random sprite
 	int r = Play::RandomRollRange(f_bk_n, f_tm_n);
+
+	// Sets food index for when eating food
+	_foodIndex = r - f_bk_n;
 
 	// Check if food is cake
 	if (r == f_bk_n)

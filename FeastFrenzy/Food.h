@@ -25,6 +25,7 @@ protected:
 	int _directionOffset;
 	FoodState _state;
 	bool _fromPlayer;
+	int _foodIndex = -1;
 
 	CharacterEnemy* _enemy;
 	CharacterPlayer* _player;
@@ -66,5 +67,7 @@ public:
 
 	bool IsCake();
 	void SetIdle();
+	int GetFoodIndex();
+
 };
 #endif

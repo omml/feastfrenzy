@@ -11,6 +11,7 @@
 class FileNamesHolder {
 public:
     static const char fileNames[][20];
+    static const char foodNames[][20];
 };
 
 #endif // FILENAMESHOLDER_H

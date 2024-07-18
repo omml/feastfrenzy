@@ -131,10 +131,12 @@ void DisplayFourthScreen()
 
 void DisplayInstructions()
 {
+	string s = FileNamesHolder::foodNames[playerHandler.GetHealthFood()];
 	// Displays instructions
 	Play::DrawFontText("64px", "ARROW KEYS TO MOVE UP, DOWN, LEFT, RIGHT", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 40 }, Play::CENTRE);
-	Play::DrawFontText("64px", "AND SPACE TO CATCH AND THROW", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 40 }, Play::CENTRE);
-	Play::DrawFontText("64px", "PRESS SPACE TO PLAY", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 120 }, Play::CENTRE);
+	Play::DrawFontText("64px", "PRESS SPACE TO CATCH AND THROW", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 40 }, Play::CENTRE);
+	Play::DrawFontText("64px", "PRESS E TO EAT " + s, { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 120 }, Play::CENTRE);
+	Play::DrawFontText("64px", "PRESS SPACE TO PLAY", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 200 }, Play::CENTRE);
 	Play::PresentDrawingBuffer();
 
 	if (Play::KeyPressed(KEY_SPACE))
@@ -276,6 +278,7 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 
 	// Creates the player
 	playerHandler.Create();
+	playerHandler.SetHealthBarObject(&playerHealthBar);
 
 	// Pass a reference of the player handler so when food items are created
 	// they have a reference of the player if the player catches food

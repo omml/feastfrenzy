@@ -32,6 +32,8 @@ CharacterPlayer::CharacterPlayer(GameObjectType go_type, int sprite, float posX,
 
 	_food = nullptr;
 	_tableHandler = nullptr;
+
+	SetHelathFood();
 }
 
 // Sets reference to the score object
@@ -40,9 +42,16 @@ void CharacterPlayer::SetScoreObject(ScoreHolder* score)
 	_score = score;
 }
 
+// Sets reference to table handler object
 void CharacterPlayer::SetTableHandler(TableHandler* tableHandler)
 {
 	_tableHandler = tableHandler;
+}
+
+// Sets reference to the health bar object
+void CharacterPlayer::SetHealthBarObject(HealthBar* healthbar)
+{
+	_healthBar = healthbar;
 }
 
 // Function to get user input
@@ -68,6 +77,10 @@ int CharacterPlayer::GetKeyDown()
 	else if (Play::KeyDown(Play::KEY_DOWN))
 	{
 		retVal = PLAYER_PRESSED_DOWN;
+	}
+	else if (Play::KeyDown(Play::KEY_E))
+	{
+		retVal = PLAYER_PRESSED_E;
 	}
 	else
 	{
@@ -245,6 +258,9 @@ void CharacterPlayer::HandlePlayerControls()
 			// Changes to the next state
 			_animationState = PLAYER_STATE_PREPARE_CATCH;
 			break;
+		default:
+			Display();
+			break;
 		}
 		break;
 	case PLAYER_STATE_WALK:
@@ -280,6 +296,9 @@ void CharacterPlayer::HandlePlayerControls()
 			DisplayStop();
 			// Changes to the next state
 			_animationState = PLAYER_STATE_PREPARE_CATCH;
+			break;
+		default:
+			Display();
 			break;
 		}
 		break;
@@ -359,6 +378,27 @@ void CharacterPlayer::HandlePlayerControls()
 			// Changes to the next state
 			_animationState = PLAYER_STATE_PREPARE_ATTACK;
 			break;
+		case PLAYER_PRESSED_E:
+
+			// Checks if food is the one that was set to increase health,
+			// this changes every game
+			if (_foodHealth == _food->GetFoodIndex())
+			{
+				// Increase health
+				_healthBar->IncreaseHealth();
+				// Reset food
+				_food->SetIdle();
+				// Reset flag
+				_ateFood = true;
+				// Do animation
+				_animationState = PLAYER_STATE_PREPARE_ATTACK;
+			}
+
+			Display();
+			break;
+		default:
+			Display();
+			break;
 		}
 		break;
 	case PLAYER_STATE_WALK_HOLD:
@@ -396,6 +436,24 @@ void CharacterPlayer::HandlePlayerControls()
 			// Changes to the next state to prepare for throwing animation
 			_animationState = PLAYER_STATE_PREPARE_ATTACK;
 			break;
+		case PLAYER_PRESSED_E:
+
+			// Checks if food is the one that was set to increase health,
+			// this changes every game
+			if (_foodHealth == _food->GetFoodIndex())
+			{
+				// Increase health
+				_healthBar->IncreaseHealth();
+				// Reset food
+				_food->SetIdle();
+				// Reset flag
+				_ateFood = true;
+				// Do animation
+				_animationState = PLAYER_STATE_PREPARE_ATTACK;
+			}
+
+			Display();
+			break;
 		}
 		break;
 	case PLAYER_STATE_PREPARE_ATTACK:
@@ -406,13 +464,23 @@ void CharacterPlayer::HandlePlayerControls()
 		// Changes the state to let do the throwing animation
 		_animationState = PLAYER_STATE_ATTACK;
 
-		// Check if food could be put on table
-		if(PutOnTable() == false)
+		if (_ateFood == true)
 		{
-			//Sets velocity to the food so it launches
-			LaunchFood();
-			// Play throw sound
-			Play::PlayAudio("throw");
+			_ateFood = false;
+			
+			// sound
+			Play::PlayAudio("eat");
+		}
+		else
+		{
+			// Check if food could be put on table
+			if (PutOnTable() == false)
+			{
+				//Sets velocity to the food so it launches
+				LaunchFood();
+				// Play throw sound
+				Play::PlayAudio("throw");
+			}
 		}
 
 		break;
@@ -426,4 +494,22 @@ void CharacterPlayer::HandlePlayerControls()
 		}
 		break;
 	}
+}
+
+void CharacterPlayer::SetHelathFood()
+{
+	_foodHealth = Play::RandomRollRange(1, f_tm_n - f_bk_n);
+}
+
+// Restarts the player when game is restarted
+void CharacterPlayer::ReStart()
+{
+	MainGameObject::Display();
+
+	SetHelathFood();
+}
+
+int CharacterPlayer::GetHealthFood()
+{
+	return _foodHealth;
 }

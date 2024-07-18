@@ -21,3 +21,7 @@ const char FileNamesHolder::fileNames[][20] = {
     "extrascenery",
 };
 
+const char FileNamesHolder::foodNames[][20] = {
+    "cake","donut","burger","melon","milk shake","pumpkin","pizza","tomato",
+};
+

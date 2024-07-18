@@ -18,9 +18,15 @@ private:
 	bool _catched;
 	Food* _food;
 	TableHandler* _tableHandler;
+	HealthBar* _healthBar;
 	ScoreHolder* _score;
+
 	int _colliderId;
 	int _colliderYOffset;
+
+	int _foodHealth = -1;
+
+	bool _ateFood = false;
 public:
 	CharacterPlayer();
 
@@ -46,7 +52,13 @@ public:
 
 	void SetScoreObject(ScoreHolder* score);
 	void SetTableHandler(TableHandler* tableHandler);
+	void SetHealthBarObject(HealthBar* healthBar);
 
 	bool PutOnTable();
+
+	void ReStart() override;
+
+	void SetHelathFood();
+	int GetHealthFood();
 };
 #endif

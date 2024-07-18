@@ -68,6 +68,7 @@ enum PlayerKey
 	PLAYER_PRESSED_LEFT,
 	PLAYER_PRESSED_RIGHT,
 	PLAYER_PRESSED_SPACE,
+	PLAYER_PRESSED_E,
 };
 
 // State of the enemy

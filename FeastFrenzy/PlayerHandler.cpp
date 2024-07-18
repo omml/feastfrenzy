@@ -30,6 +30,14 @@ void PlayerHandler::SetTableHandler(TableHandler* tableHandler)
 	_player.SetTableHandler(_tableHandler);
 }
 
+// Sets reference to the health bar object
+void PlayerHandler::SetHealthBarObject(HealthBar* healthbar)
+{
+	_healthBar = healthbar;
+
+	_player.SetHealthBarObject(_healthBar);
+}
+
 // Creates the player
 void PlayerHandler::Create()
 {
@@ -58,4 +66,10 @@ int PlayerHandler::GetObjectId()
 void PlayerHandler::ReStart()
 {
 	_player.ReStart();
+}
+
+// Returns food that increases health
+int PlayerHandler::GetHealthFood()
+{
+	return _player.GetHealthFood();
 }

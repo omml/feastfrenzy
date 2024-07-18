@@ -74,6 +74,23 @@ void HealthBar::DecreaseHealth()
 	CalculateTransformMatrix();
 }
 
+// Inecreases the health
+void HealthBar::IncreaseHealth()
+{
+	_currentHealth += _decreaseStep;
+
+	if (_currentHealth > _maxHealth)
+	{
+		_currentHealth = _maxHealth;
+	}
+
+	// Set new scale for the health bar
+	_healthScale = _currentHealth / _maxHealth;
+
+	// Recalculate health bar 
+	CalculateTransformMatrix();
+}
+
 // Calculates the health bar transformation matrix to take in count changes on scale
 void HealthBar::CalculateTransformMatrix()
 {

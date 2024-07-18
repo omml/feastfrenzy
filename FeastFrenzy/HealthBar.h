@@ -15,6 +15,7 @@ public:
 	void Create();
 	void Display();
 	void DecreaseHealth();
+	void IncreaseHealth();
 	bool IsAlive();
 	void ReStart();
 private:

@@ -89,7 +89,7 @@ public:
 
 	void SetPosition(float x, float y);
 
-	void ReStart();
+	virtual void ReStart();
 };
 #endif
 
