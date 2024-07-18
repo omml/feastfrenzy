@@ -22,5 +22,6 @@ table,
 playercollider,
 extrascenery,
 smoke_appear_7,
+smoke_disappear_7,
 };
 #endif

@@ -19,7 +19,8 @@ const char FileNamesHolder::fileNames[][20] = {
     "table",
     "playercollider",
     "extrascenery",
-    "smoke_appear_7"
+    "smoke_appear_7",
+    "smoke_disappear_7",
 };
 
 const char FileNamesHolder::foodNames[][20] = {

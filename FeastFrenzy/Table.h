@@ -12,8 +12,10 @@ private:
 	MainGameObject _collider;
 	MainGameObject _cake;
 	MainGameObject _smoke;
+	MainGameObject _smokeCake;
 	bool _hasCake = false;
 	bool _playedAppearSound = false;
+	bool _displayDisappear = false;
 
 public:
 	Table();
