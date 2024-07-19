@@ -189,7 +189,7 @@ void EnemyHandler::Display()
 			// Set original direction
 			_enemies[i].SetCurrentDirection(_originalDirection[i]);
 			// Restart, set a flag if enemy's food was catched
-			_enemies[i].ReStart(_originalDirection[i], _enemies[i].GetFoodState() != FOOD_CARRIED_PLAYER);
+			_enemies[i].ReSpawn(_originalDirection[i], _enemies[i].GetFoodState() != FOOD_CARRIED_PLAYER);
 		}
 		else
 		{
@@ -210,8 +210,8 @@ void EnemyHandler::ReStart()
 		_enemies[i].SetLimits(_posXMax, 0.0f);
 		// Set original direction
 		_enemies[i].SetCurrentDirection(_originalDirection[i]);
-		// Restart, set a flag if enemy's food was catched
-		_enemies[i].ReStart(_originalDirection[i], true);
+		// Restart enemies
+		_enemies[i].ReStart(_originalDirection[i]);
 	}
 }
 

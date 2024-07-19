@@ -45,7 +45,7 @@ EnemyState CharacterEnemy::GetState()
 	return _enemyState;
 }
 
-void CharacterEnemy::ReStart(ObjectDirection dir, bool resFood)
+void CharacterEnemy::ReSpawn(ObjectDirection dir, bool resFood)
 {
 	_enemyState = ENEMY_INIT;
 	_maxCounter = Play::RandomRoll(4);
@@ -61,6 +61,18 @@ void CharacterEnemy::ReStart(ObjectDirection dir, bool resFood)
 		// Next time it respawns set animation to walking as player is carrying the
 		SetSprite(_walkingSprites[dir]._spriteName, _walkingSprites[dir]._animSpeed);
 	}
+}
+
+void CharacterEnemy::ReStart(ObjectDirection dir)
+{
+	MainGameObject::ReStart();
+
+	_enemyState = ENEMY_IDLE;
+	_maxCounter = Play::RandomRoll(4);
+	
+	// Next time it respawns set animation walking holding again the food
+	SetSprite(_walkingHoldingSprites[dir]._spriteName, _walkingHoldingSprites[dir]._animSpeed);
+	_food->SetIdle();
 }
 
 void CharacterEnemy::SetFood(Food* food)

@@ -40,7 +40,8 @@ public:
 
 	void Animate();
 
-	void ReStart(ObjectDirection dir, bool resFood);
+	void ReStart(ObjectDirection dir);
+	void ReSpawn(ObjectDirection dir, bool resFood);
 
 	void ChangeInitPosition();
 
