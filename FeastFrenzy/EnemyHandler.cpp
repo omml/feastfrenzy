@@ -52,8 +52,8 @@ void EnemyHandler::Create(int screenPosition)
 		break;
 	case DIRECTION_LEFT:
 		// Sets initial movement limits, direction and sprite for the left side of the screen
-		_posXMin = -50;
-		_posXMax = 50;
+		_posXMin = -53;
+		_posXMax = 40;
 		_posYMin = 110;
 		_posYMax = 500;
 		// Enemy will move from out of the screen to appear
@@ -63,7 +63,7 @@ void EnemyHandler::Create(int screenPosition)
 	case DIRECTION_RIGHT:
 		// Sets initial movement limits, direction and sprite for the right side of the screen
 		_posXMin = 1280+50;
-		_posXMax = 1280-50;
+		_posXMax = 1280-43;
 		_posYMin = 110;
 		_posYMax = 500;
 		// Enemy will move from out of the screen to appear
