@@ -47,8 +47,6 @@ FoodHandler foodHandlerLeft;
 EnemyHandler enemyHandlerRight;
 // Food handler for right screen enemies
 FoodHandler foodHandlerRight;
-// Difficulty handler;
-DifficultyHandler difficulty = DifficultyHandler();
 // Table handler
 TableHandler tableHandler;
 // Render handler for table and player objects
@@ -167,7 +165,7 @@ void DisplayInGameGUI()
 		// Display score, level and text on top of the screen
 		Play::DrawFontText("40px", "TAB: Help", { 0, DISPLAY_HEIGHT - 40 }, Play::LEFT);
 		Play::DrawFontText("40px", "Score: " + std::to_string(ScoreHolder::GetInstance().GetScore()), {DISPLAY_WIDTH / 2 - 150, DISPLAY_HEIGHT - 40}, Play::CENTRE);
-		Play::DrawFontText("40px", "Level: " + std::to_string(difficulty.GetLevel()), { DISPLAY_WIDTH / 2 + 150, DISPLAY_HEIGHT - 40 }, Play::CENTRE);
+		Play::DrawFontText("40px", "Level: " + std::to_string(DifficultyHandler::GetInstance().GetLevel()), {DISPLAY_WIDTH / 2 + 150, DISPLAY_HEIGHT - 40}, Play::CENTRE);
 		
 		Play::PresentDrawingBuffer();
 
@@ -191,7 +189,7 @@ void ReStartGame()
 	enemyHandlerRight.ReStart();
 	playerHandler.ReStart();
 	background.SetSprite(main_gui, 0.0f);
-	difficulty.ReStart();
+	DifficultyHandler::GetInstance().ReStart();
 	tableHandler.ReStart();
 }
 
@@ -285,8 +283,6 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	enemyHandlerLeft.SetFoodHandler(&foodHandlerLeft);
 	// Create enemies that appear on the left of the screen
 	enemyHandlerLeft.Create(DIRECTION_LEFT);
-	// Set the difficulty handler object
-	enemyHandlerLeft.SetDifficultyHandler(&difficulty);
 
 	// Pass a reference of the player handler so when food items are created
 	// they have a reference of the player if the player catches food
@@ -298,12 +294,9 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	enemyHandlerRight.SetFoodHandler(&foodHandlerRight);
 	// Create enemies that appear on the left of the screen
 	enemyHandlerRight.Create(DIRECTION_RIGHT);
-	// Set the difficulty handler object
-	enemyHandlerRight.SetDifficultyHandler(&difficulty);
 
 	// Create tables
 	tableHandler.Create(150.f, 1125.0f, 128.0f, 475.f);
-	tableHandler.SetDifficultyHandler(&difficulty);
 	playerHandler.SetTableHandler(&tableHandler);
 
 	// Set render handler
@@ -324,7 +317,7 @@ bool MainGameUpdate( float elapsedTime )
 	DisplayGame();
 
 	// Check if it needs to increase difficulty
-	difficulty.CheckDifficulty();
+	DifficultyHandler::GetInstance().CheckDifficulty();
 
 	Play::PresentDrawingBuffer();
 	return Play::KeyDown( (Play::KeyboardButton)KEY_ESCAPE );

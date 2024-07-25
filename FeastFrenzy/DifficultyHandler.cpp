@@ -7,9 +7,16 @@
 #include "DifficultyHandler.h"
 
 
+
 DifficultyHandler::DifficultyHandler()
 {
 	_level = LEVEL01;
+}
+
+// To implement Singleton pattern
+DifficultyHandler& DifficultyHandler::GetInstance() {
+	static DifficultyHandler instance;
+	return instance;
 }
 
 int DifficultyHandler::GetLevel()

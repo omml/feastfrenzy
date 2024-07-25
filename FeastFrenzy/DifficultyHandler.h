@@ -15,6 +15,8 @@ private:
 	DifficultyLevel _level;
 
 public:
+	static DifficultyHandler& GetInstance();
+
 	DifficultyHandler();
 
 	void ReStart();
@@ -26,5 +28,8 @@ public:
 	int GetNumTables();
 
 	int GetLevel();
+private:
+	DifficultyHandler(const DifficultyHandler&) = delete;
+	void operator=(const DifficultyHandler&) = delete;
 };
 

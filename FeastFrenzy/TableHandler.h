@@ -13,7 +13,6 @@
 class TableHandler
 {
 private:
-	DifficultyHandler* _difficultyHandler;
 	Table _tables[NUM_ENEMIES];
 	FoodHandler* _foodHandler;
 	float _posXMin;
@@ -25,7 +24,6 @@ public:
 	TableHandler();
 
 	void SetFoodHandler(FoodHandler* foodHandler);
-	void SetDifficultyHandler(DifficultyHandler* difficultyHandler);
 
 	Table* GetTable(int index);
 

@@ -17,7 +17,6 @@ class FoodHandler;
 class EnemyHandler
 {
 private:
-	DifficultyHandler* _difficultyHandler;
 	CharacterEnemy _enemies[NUM_ENEMIES];
 	ObjectDirection _originalDirection[NUM_ENEMIES];
 	int _states[4];
@@ -34,7 +33,6 @@ public:
 	EnemyHandler();
 	
 	void SetFoodHandler(FoodHandler* foodHandler);
-	void SetDifficultyHandler(DifficultyHandler* difficultyHandler);
 	
 	CharacterEnemy* GetEnemy(int index);
 	

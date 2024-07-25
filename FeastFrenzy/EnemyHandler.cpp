@@ -15,20 +15,12 @@
 EnemyHandler::EnemyHandler()
 {
 	_foodHandler = nullptr;
-	_difficultyHandler = nullptr;
 }
 
 // Sets the food handler to pass references of food to the enemies
 void EnemyHandler::SetFoodHandler(FoodHandler* foodHandler)
 {
 	_foodHandler = foodHandler;
-	_difficultyHandler = nullptr;
-}
-
-// Sets the food handler to pass references of food to the enemies
-void EnemyHandler::SetDifficultyHandler(DifficultyHandler* difficultyHandler)
-{
-	_difficultyHandler = difficultyHandler;
 }
 
 // Returns enemy depending on index
@@ -170,7 +162,7 @@ void EnemyHandler::Create(int screenPosition)
 // checks the state to restart enemies
 void EnemyHandler::Display()
 {
-	int loopLimit = _difficultyHandler->GetNumEnemies();
+	int loopLimit = DifficultyHandler::GetInstance().GetNumEnemies();
 
 	for (int i = 0; i < loopLimit; i++)
 	{

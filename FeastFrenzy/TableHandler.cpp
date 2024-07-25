@@ -17,20 +17,12 @@
 TableHandler::TableHandler()
 {
 	_foodHandler = nullptr;
-	_difficultyHandler = nullptr;
 }
 
 // Sets the food handler to pass references of food to the enemies
 void TableHandler::SetFoodHandler(FoodHandler* foodHandler)
 {
 	_foodHandler = foodHandler;
-	_difficultyHandler = nullptr;
-}
-
-// Sets the food handler to pass references of food to the enemies
-void TableHandler::SetDifficultyHandler(DifficultyHandler* difficultyHandler)
-{
-	_difficultyHandler = difficultyHandler;
 }
 
 // Returns enemy depending on index
@@ -41,7 +33,7 @@ Table* TableHandler::GetTable(int index)
 
 int TableHandler::GetNumTables()
 {
-	return _difficultyHandler->GetNumTables();
+	return DifficultyHandler::GetInstance().GetNumTables();
 }
 
 // Creates enemies depending on the side of the screen
@@ -68,7 +60,7 @@ void TableHandler::Create(float xMin, float xMax, float yMin, float yMax)
 // checks the state to restart enemies
 void TableHandler::Display()
 {
-	int loopLimit = _difficultyHandler->GetNumTables();
+	int loopLimit = DifficultyHandler::GetInstance().GetNumTables();
 
 	for (int i = 0; i < loopLimit; i++)
 	{
