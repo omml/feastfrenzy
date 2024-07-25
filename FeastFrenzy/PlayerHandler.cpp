@@ -14,14 +14,6 @@ CharacterPlayer* PlayerHandler::GetPlayer()
 	return &_player;
 }
 
-// Sets reference to the score object
-void PlayerHandler::SetScoreObject(ScoreHolder* score)
-{
-	_score = score;
-
-	_player.SetScoreObject(_score);
-}
-
 // Sets the table handler
 void PlayerHandler::SetTableHandler(TableHandler* tableHandler)
 {

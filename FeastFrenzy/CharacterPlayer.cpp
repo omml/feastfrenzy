@@ -36,12 +36,6 @@ CharacterPlayer::CharacterPlayer(GameObjectType go_type, int sprite, float posX,
 	SetHelathFood();
 }
 
-// Sets reference to the score object
-void CharacterPlayer::SetScoreObject(ScoreHolder* score)
-{
-	_score = score;
-}
-
 // Sets reference to table handler object
 void CharacterPlayer::SetTableHandler(TableHandler* tableHandler)
 {
@@ -210,7 +204,7 @@ bool CharacterPlayer::PutOnTable()
 					retVal = true;
 					table->SetCake(true);
 					_food->SetIdle();
-					_score->IncScore(4);
+					ScoreHolder::GetInstance().IncScore(4);
 					Play::PlayAudio("cakeplaced");
 					break;
 				}

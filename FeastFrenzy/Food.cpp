@@ -19,7 +19,6 @@ Food::Food() : MainGameObject()
 	_state = FOOD_CARRIED_ENEMY;
 	_enemy = nullptr;
 	_player = nullptr;
-	_score = nullptr;
 }
 
 Food::Food(GameObjectType go_type, int sprite, float posX, float posY, const char name[], int colRad, float scale, float animSpeed, int offset, int dirOffset) :
@@ -30,7 +29,6 @@ Food::Food(GameObjectType go_type, int sprite, float posX, float posY, const cha
 	_state = FOOD_CARRIED_ENEMY;
 	_enemy = nullptr;
 	_player = nullptr;
-	_score = nullptr;
 
 	// Check if food is cake
 	if (sprite == f_bk_n)
@@ -60,12 +58,6 @@ FoodState Food::GetState()
 bool Food::IsCake()
 {
 	return _isCake;
-}
-
-// Sets reference to the score object
-void Food::SetScoreObject(ScoreHolder* score)
-{
-	_score = score;
 }
 
 // Sets reference to the health bar object
@@ -326,7 +318,7 @@ void Food::Animate()
 			if (_fromPlayer == true)
 			{
 				// Increases the score as player hit an enemy
-				_score->IncScore();
+				ScoreHolder::GetInstance().IncScore();
 			}
 
 			Display();

@@ -19,7 +19,6 @@ private:
 	Food* _food;
 	TableHandler* _tableHandler;
 	HealthBar* _healthBar;
-	ScoreHolder* _score;
 
 	int _colliderId;
 	int _colliderYOffset;
@@ -50,7 +49,6 @@ public:
 
 	void LaunchFood();
 
-	void SetScoreObject(ScoreHolder* score);
 	void SetTableHandler(TableHandler* tableHandler);
 	void SetHealthBarObject(HealthBar* healthBar);
 

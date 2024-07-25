@@ -13,12 +13,9 @@ class DifficultyHandler
 {
 private:
 	DifficultyLevel _level;
-	ScoreHolder* _score;
 
 public:
 	DifficultyHandler();
-
-	void SetScoreHolderObject(ScoreHolder* s);
 
 	void ReStart();
 

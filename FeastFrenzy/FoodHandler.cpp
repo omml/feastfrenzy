@@ -24,12 +24,6 @@ Food* FoodHandler::GetFood(int index)
 	return &_food[index];
 }
 
-// Sets a reference to the score object to increase score
-void FoodHandler::SetScoreObject(ScoreHolder* score)
-{
-	_score = score;
-}
-
 // Sets a reference to the score object to decrease depending health
 void FoodHandler::SetHealthBarObject(HealthBar* healthBar)
 {
@@ -50,8 +44,6 @@ void FoodHandler::Create(ObjectDirection dir)
 		_food[i] = Food(goType, r, -100.0f, -100.0f, "f", 25, 0.75f, 0.0f, i, dir*4 );
 		// Sets the player
 		_food[i].SetPlayer(_playerHandler->GetPlayer());
-		// Sets the score object
-		_food[i].SetScoreObject(_score);
 		// Sets the healthbar object
 		_food[i].SetHealthBarObject(_healthBar);
 	}

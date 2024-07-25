@@ -19,7 +19,6 @@ class FoodHandler
 {
 private:
 	PlayerHandler* _playerHandler;
-	ScoreHolder* _score;
 	HealthBar* _healthBar;
 
 public:
@@ -34,8 +33,6 @@ public:
 	void Create(ObjectDirection dir);
 	
 	void Display();
-
-	void SetScoreObject(ScoreHolder* score);
 
 	void SetHealthBarObject(HealthBar* healthBar);
 	

@@ -39,8 +39,6 @@ MainGameObject background;
 MainGameObject bottomTables;
 // Health bar
 HealthBar playerHealthBar = HealthBar(10.f,.1f);
-// Score holder
-ScoreHolder score = ScoreHolder();
 // Player handler
 PlayerHandler playerHandler;
 // Enemy handler for left screen enemies
@@ -170,7 +168,7 @@ void DisplayInGameGUI()
 		
 		// Display score, level and text on top of the screen
 		Play::DrawFontText("40px", "TAB: Help", { 0, DISPLAY_HEIGHT - 40 }, Play::LEFT);
-		Play::DrawFontText("40px", "Score: " + std::to_string(score.GetScore()), { DISPLAY_WIDTH / 2 - 150, DISPLAY_HEIGHT - 40 }, Play::CENTRE);
+		Play::DrawFontText("40px", "Score: " + std::to_string(ScoreHolder::GetInstance().GetScore()), {DISPLAY_WIDTH / 2 - 150, DISPLAY_HEIGHT - 40}, Play::CENTRE);
 		Play::DrawFontText("40px", "Level: " + std::to_string(difficulty.GetLevel()), { DISPLAY_WIDTH / 2 + 150, DISPLAY_HEIGHT - 40 }, Play::CENTRE);
 		
 		Play::PresentDrawingBuffer();
@@ -190,7 +188,7 @@ void DisplayInGameGUI()
 void ReStartGame()
 {
 	playerHealthBar.ReStart();
-	score.ReStart();
+	ScoreHolder::GetInstance().ReStart();
 	enemyHandlerLeft.ReStart();
 	enemyHandlerRight.ReStart();
 	playerHandler.ReStart();
@@ -204,7 +202,7 @@ void DisplayGameOverGUI()
 {
 	// Displays instructions
 	Play::DrawFontText("40px", "Game Over", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 260 }, Play::CENTRE);
-	Play::DrawFontText("40px", "Final Score: " + std::to_string(score.GetScore()), {DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 130}, Play::CENTRE);
+	Play::DrawFontText("40px", "Final Score: " + std::to_string(ScoreHolder::GetInstance().GetScore()), {DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 130}, Play::CENTRE);
 	Play::DrawFontText("40px", "Train your catching and throwing skills", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 }, Play::CENTRE);
 	Play::DrawFontText("40px", "Press SPACE to MAIN SCREEN", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 140 }, Play::CENTRE);
 	Play::PresentDrawingBuffer();
@@ -283,8 +281,6 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	// Pass a reference of the player handler so when food items are created
 	// they have a reference of the player if the player catches food
 	foodHandlerLeft.SetPlayerHandler(&playerHandler);
-	// Sets the score object
-	foodHandlerLeft.SetScoreObject(&score);
 	// Sets the health bar object
 	foodHandlerLeft.SetHealthBarObject(&playerHealthBar);
 	// Food is created before so it can be assigned to an enemy
@@ -300,8 +296,6 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	// Pass a reference of the player handler so when food items are created
 	// they have a reference of the player if the player catches food
 	foodHandlerRight.SetPlayerHandler(&playerHandler);
-	// Sets the score object
-	foodHandlerRight.SetScoreObject(&score);
 	// Sets the health bar object
 	foodHandlerRight.SetHealthBarObject(&playerHealthBar);
 	// Food is created before so it can be assigned to an enemy
@@ -313,10 +307,6 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	enemyHandlerRight.Create(DIRECTION_RIGHT);
 	// Set the difficulty handler object
 	enemyHandlerRight.SetDifficultyHandler(&difficulty);
-
-	// Sets the score object
-	difficulty.SetScoreHolderObject(&score);
-	playerHandler.SetScoreObject(&score);
 
 	// Create tables
 	tableHandler.Create(150.f, 1125.0f, 128.0f, 475.f);

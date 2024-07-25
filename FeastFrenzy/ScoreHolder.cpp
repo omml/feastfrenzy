@@ -12,6 +12,12 @@ ScoreHolder::ScoreHolder()
 	_score = 0;
 }
 
+// To implement Singleton pattern
+ScoreHolder& ScoreHolder::GetInstance() {
+	static ScoreHolder instance;
+	return instance;
+}
+
 // Resets score
 void ScoreHolder::ReStart()
 {

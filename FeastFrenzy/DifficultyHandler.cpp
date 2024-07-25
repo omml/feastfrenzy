@@ -17,11 +17,6 @@ int DifficultyHandler::GetLevel()
 	return (int)_level;
 }
 
-void DifficultyHandler::SetScoreHolderObject(ScoreHolder* s)
-{
-	_score = s;
-}
-
 void DifficultyHandler::ReStart()
 {
 	_level = LEVEL01;
@@ -53,7 +48,7 @@ void DifficultyHandler::CheckDifficulty()
 		break;
 	}
 
-	if (_score->GetScore() >= threshold)
+	if (ScoreHolder::GetInstance().GetScore() >= threshold)
 	{
 		_level = (DifficultyLevel)((int)_level + 1);
 	}

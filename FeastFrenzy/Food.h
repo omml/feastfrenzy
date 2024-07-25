@@ -30,7 +30,6 @@ protected:
 	CharacterEnemy* _enemy;
 	CharacterPlayer* _player;
 
-	ScoreHolder* _score;
 	HealthBar* _healthBar;
 
 	bool _isCake;
@@ -56,7 +55,6 @@ public:
 	// Restarts to initial state
 	void ReStart();
 
-	void SetScoreObject(ScoreHolder* score);
 	void SetHealthBarObject(HealthBar* healthBar);
 
 	FoodState GetState();
