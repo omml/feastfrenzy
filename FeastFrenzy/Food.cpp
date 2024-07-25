@@ -60,12 +60,6 @@ bool Food::IsCake()
 	return _isCake;
 }
 
-// Sets reference to the health bar object
-void Food::SetHealthBarObject(HealthBar* healthbar)
-{
-	_healthBar = healthbar;
-}
-
 // Restart the food, 
 void Food::ReStart()
 {
@@ -306,7 +300,7 @@ void Food::Animate()
 			else
 			{
 				// Decreases the health bar as player was hit
-				_healthBar->DecreaseHealth();
+				HealthBar::GetInstance().DecreaseHealth();
 
 				Display();
 				// Prepare to display the splat animation

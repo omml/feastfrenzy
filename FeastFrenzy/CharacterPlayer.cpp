@@ -10,7 +10,7 @@
 #include "CommonDefinitions.h"
 #include "SpritesDefinitions.h"
 #include "FileNamesHolder.h"
-
+#include "HealthBar.h"
 
 CharacterPlayer::CharacterPlayer()
 {
@@ -40,12 +40,6 @@ CharacterPlayer::CharacterPlayer(GameObjectType go_type, int sprite, float posX,
 void CharacterPlayer::SetTableHandler(TableHandler* tableHandler)
 {
 	_tableHandler = tableHandler;
-}
-
-// Sets reference to the health bar object
-void CharacterPlayer::SetHealthBarObject(HealthBar* healthbar)
-{
-	_healthBar = healthbar;
 }
 
 // Function to get user input
@@ -379,7 +373,7 @@ void CharacterPlayer::HandlePlayerControls()
 			if (_foodHealth == _food->GetFoodIndex())
 			{
 				// Increase health
-				_healthBar->IncreaseHealth();
+				HealthBar::GetInstance().IncreaseHealth();
 				// Reset food
 				_food->SetIdle();
 				// Reset flag
@@ -437,7 +431,7 @@ void CharacterPlayer::HandlePlayerControls()
 			if (_foodHealth == _food->GetFoodIndex())
 			{
 				// Increase health
-				_healthBar->IncreaseHealth();
+				HealthBar::GetInstance().IncreaseHealth();
 				// Reset food
 				_food->SetIdle();
 				// Reset flag

@@ -10,7 +10,6 @@
 
 #include "MainGameObject.h"
 #include "ScoreHolder.h"
-#include "HealthBar.h"
 
 class CharacterEnemy;
 class CharacterPlayer;
@@ -29,8 +28,6 @@ protected:
 
 	CharacterEnemy* _enemy;
 	CharacterPlayer* _player;
-
-	HealthBar* _healthBar;
 
 	bool _isCake;
 
@@ -54,8 +51,6 @@ public:
 	bool IsOutsideScreen();
 	// Restarts to initial state
 	void ReStart();
-
-	void SetHealthBarObject(HealthBar* healthBar);
 
 	FoodState GetState();
 

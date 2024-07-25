@@ -11,6 +11,8 @@
 class HealthBar
 {
 public:
+	static HealthBar& GetInstance();
+	HealthBar();
 	HealthBar(float maxHealth, float decreasePrecentage);
 	void Create();
 	void Display();
@@ -37,5 +39,7 @@ private:
 	Play::Vector2f _spriteSize;
 
 	void CalculateTransformMatrix();
+	HealthBar(const HealthBar&) = delete;
+	void operator=(const HealthBar&) = delete;
 };
 

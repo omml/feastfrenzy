@@ -9,7 +9,6 @@
 #define FOODHANDLER_H
 
 #include "Food.h"
-#include "HealthBar.h"
 
 class PlayerHandler;
 class Food;
@@ -19,7 +18,6 @@ class FoodHandler
 {
 private:
 	PlayerHandler* _playerHandler;
-	HealthBar* _healthBar;
 
 public:
 	Food _food[NUM_ENEMIES];
@@ -33,8 +31,5 @@ public:
 	void Create(ObjectDirection dir);
 	
 	void Display();
-
-	void SetHealthBarObject(HealthBar* healthBar);
-	
 };
 #endif

@@ -9,6 +9,32 @@
 #include "SpritesDefinitions.h"
 #include "FileNamesHolder.h"
 
+// Singleton patter for Health bar
+HealthBar& HealthBar::GetInstance() {
+	static HealthBar instance;
+	return instance;
+}
+
+HealthBar::HealthBar()
+{
+	_maxHealth = 10.f;
+
+	if (_maxHealth <= 0.f)
+	{
+		_maxHealth = 100.f;
+	}
+
+	_currentHealth = _maxHealth;
+	_decreasePercentage = 0.1f;
+
+	if (_decreasePercentage > 1.0f)
+	{
+		_decreasePercentage = 1.f;
+	}
+
+	_decreaseStep = _maxHealth * _decreasePercentage;
+}
+
 HealthBar::HealthBar(float maxHealth, float decreasePrecentage)
 {
 	_maxHealth = maxHealth;

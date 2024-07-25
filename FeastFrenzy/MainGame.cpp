@@ -37,8 +37,6 @@ GameState gameState;
 MainGameObject background;
 // Table rows at bottom
 MainGameObject bottomTables;
-// Health bar
-HealthBar playerHealthBar = HealthBar(10.f,.1f);
 // Player handler
 PlayerHandler playerHandler;
 // Enemy handler for left screen enemies
@@ -152,7 +150,7 @@ void DisplayInstructions()
 // Displays GUI during game
 void DisplayInGameGUI()
 {
-	if (playerHealthBar.IsAlive())
+	if (HealthBar::GetInstance().IsAlive())
 	{
 		// Playing mode
 		// Update every game object
@@ -161,7 +159,7 @@ void DisplayInGameGUI()
 		foodHandlerLeft.Display();
 		enemyHandlerRight.Display();
 		foodHandlerRight.Display();
-		playerHealthBar.Display();
+		HealthBar::GetInstance().Display();
 
 		// Display bottom tables
 		bottomTables.Display();
@@ -187,7 +185,7 @@ void DisplayInGameGUI()
 // Restart all objects
 void ReStartGame()
 {
-	playerHealthBar.ReStart();
+	HealthBar::GetInstance().ReStart();
 	ScoreHolder::GetInstance().ReStart();
 	enemyHandlerLeft.ReStart();
 	enemyHandlerRight.ReStart();
@@ -272,17 +270,14 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	bottomTables = MainGameObject(TYPE_EXTRA_SCENERY, extrascenery, 636.0f, 77.0f, "extrascenery", 0, 1.0f, 0.0f);
 
 	// Creates healthbar
-	playerHealthBar.Create();
+	HealthBar::GetInstance().Create();
 
 	// Creates the player
 	playerHandler.Create();
-	playerHandler.SetHealthBarObject(&playerHealthBar);
 
 	// Pass a reference of the player handler so when food items are created
 	// they have a reference of the player if the player catches food
 	foodHandlerLeft.SetPlayerHandler(&playerHandler);
-	// Sets the health bar object
-	foodHandlerLeft.SetHealthBarObject(&playerHealthBar);
 	// Food is created before so it can be assigned to an enemy
 	foodHandlerLeft.Create(DIRECTION_LEFT);
 	// Pass a reference of the food handler so when enemies are created 
@@ -296,8 +291,6 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	// Pass a reference of the player handler so when food items are created
 	// they have a reference of the player if the player catches food
 	foodHandlerRight.SetPlayerHandler(&playerHandler);
-	// Sets the health bar object
-	foodHandlerRight.SetHealthBarObject(&playerHealthBar);
 	// Food is created before so it can be assigned to an enemy
 	foodHandlerRight.Create(DIRECTION_RIGHT);
 	// Pass a reference of the food handler so when enemies are created 

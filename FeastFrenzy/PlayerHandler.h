@@ -15,7 +15,6 @@ class PlayerHandler
 {
 private:
 	TableHandler* _tableHandler;
-	HealthBar* _healthBar;
 
 	CharacterPlayer _player;
 
@@ -28,7 +27,6 @@ public:
 	void Create();
 
 	void SetTableHandler(TableHandler* tableHandler);
-	void SetHealthBarObject(HealthBar* healthBar);
 
 	void Display();
 

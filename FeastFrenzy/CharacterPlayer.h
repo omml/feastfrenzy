@@ -18,7 +18,6 @@ private:
 	bool _catched;
 	Food* _food;
 	TableHandler* _tableHandler;
-	HealthBar* _healthBar;
 
 	int _colliderId;
 	int _colliderYOffset;
@@ -50,7 +49,6 @@ public:
 	void LaunchFood();
 
 	void SetTableHandler(TableHandler* tableHandler);
-	void SetHealthBarObject(HealthBar* healthBar);
 
 	bool PutOnTable();
 

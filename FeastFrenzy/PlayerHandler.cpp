@@ -22,14 +22,6 @@ void PlayerHandler::SetTableHandler(TableHandler* tableHandler)
 	_player.SetTableHandler(_tableHandler);
 }
 
-// Sets reference to the health bar object
-void PlayerHandler::SetHealthBarObject(HealthBar* healthbar)
-{
-	_healthBar = healthbar;
-
-	_player.SetHealthBarObject(_healthBar);
-}
-
 // Creates the player
 void PlayerHandler::Create()
 {
