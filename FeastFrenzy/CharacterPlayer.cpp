@@ -18,7 +18,6 @@ CharacterPlayer::CharacterPlayer()
 	_colliderId = -1;
 	_colliderYOffset = 50;
 	_food = nullptr;
-	_tableHandler = nullptr;
 }
 
 CharacterPlayer::CharacterPlayer(GameObjectType go_type, int sprite, float posX, float posY, const char name[], int colRad, float scale, float animSpeed) :
@@ -31,15 +30,8 @@ CharacterPlayer::CharacterPlayer(GameObjectType go_type, int sprite, float posX,
 	_colliderId = Play::CreateGameObject(TYPE_PLAYER_COLLIDER, { posX, posY + _colliderYOffset }, 15, FileNamesHolder::fileNames[playercollider]);
 
 	_food = nullptr;
-	_tableHandler = nullptr;
 
 	SetHelathFood();
-}
-
-// Sets reference to table handler object
-void CharacterPlayer::SetTableHandler(TableHandler* tableHandler)
-{
-	_tableHandler = tableHandler;
 }
 
 // Function to get user input
@@ -108,11 +100,11 @@ void CharacterPlayer::CheckObjectsInPlayingArea()
 
 	Play::Vector2f playerSize = GetSpriteSize();
 
-	int numTables = _tableHandler->GetNumTables();
+	int numTables = TableHandler::GetInstance().GetNumTables();
 
 	for (int i = 0; i < numTables; i++)
 	{
-		Table* t = _tableHandler->GetTable(i);
+		Table* t = TableHandler::GetInstance().GetTable(i);
 
 		Play::GameObject& table = Play::GetGameObject(t->GetObjectId());
 
@@ -185,11 +177,11 @@ bool CharacterPlayer::PutOnTable()
 
 	if (_food->IsCake() == true)
 	{
-		int numTables = _tableHandler->GetNumTables();
+		int numTables = TableHandler::GetInstance().GetNumTables();
 
 		for (int i = 0; i < numTables; i++)
 		{
-			Table* table = _tableHandler->GetTable(i);
+			Table* table = TableHandler::GetInstance().GetTable(i);
 
 			if (table->HasCake() == false)
 			{

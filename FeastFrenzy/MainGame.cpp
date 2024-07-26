@@ -47,8 +47,6 @@ FoodHandler foodHandlerLeft;
 EnemyHandler enemyHandlerRight;
 // Food handler for right screen enemies
 FoodHandler foodHandlerRight;
-// Table handler
-TableHandler tableHandler;
 // Render handler for table and player objects
 RenderHandler renderHandler;
 // Main song audio id;
@@ -190,7 +188,7 @@ void ReStartGame()
 	playerHandler.ReStart();
 	background.SetSprite(main_gui, 0.0f);
 	DifficultyHandler::GetInstance().ReStart();
-	tableHandler.ReStart();
+	TableHandler::GetInstance().ReStart();
 }
 
 // Displays game over
@@ -296,12 +294,10 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	enemyHandlerRight.Create(DIRECTION_RIGHT);
 
 	// Create tables
-	tableHandler.Create(150.f, 1125.0f, 128.0f, 475.f);
-	playerHandler.SetTableHandler(&tableHandler);
+	TableHandler::GetInstance().Create(150.f, 1125.0f, 128.0f, 475.f);
 
 	// Set render handler
 	renderHandler.SetPlayerHandler(&playerHandler);
-	renderHandler.SetTableHandler(&tableHandler);
 }
 
 

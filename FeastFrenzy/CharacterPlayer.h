@@ -17,7 +17,6 @@ class CharacterPlayer : public Character
 private:
 	bool _catched;
 	Food* _food;
-	TableHandler* _tableHandler;
 
 	int _colliderId;
 	int _colliderYOffset;
@@ -47,8 +46,6 @@ public:
 	bool GetCatch();
 
 	void LaunchFood();
-
-	void SetTableHandler(TableHandler* tableHandler);
 
 	bool PutOnTable();
 

@@ -21,6 +21,8 @@ private:
 	float _posYMax;
 
 public:
+	static TableHandler& GetInstance();
+
 	TableHandler();
 
 	void SetFoodHandler(FoodHandler* foodHandler);
@@ -34,5 +36,8 @@ public:
 	void ReStart();
 
 	int GetNumTables();
+private:
+	TableHandler(const TableHandler&) = delete;
+	void operator=(const TableHandler&) = delete;
 };
 

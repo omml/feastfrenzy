@@ -8,14 +8,10 @@
 #include <algorithm>
 #include "RenderHandler.h"
 #include "PlayerHandler.h"
+#include "TableHandler.h"
 
 RenderHandler::RenderHandler()
 {}
-
-void RenderHandler::SetTableHandler(TableHandler* t)
-{
-	_tableHandler = t;
-}
 
 void RenderHandler::SetPlayerHandler(PlayerHandler* p)
 {
@@ -28,7 +24,7 @@ bool CompareY(MainGameObject* a, MainGameObject* b)
 	Play::GameObject& aObj = Play::GetGameObject(a->GetObjectId());
 	Play::GameObject& bObj = Play::GetGameObject(b->GetObjectId());
 
-	return aObj.pos.y > bObj.pos.y;
+	return aObj.pos.y >= bObj.pos.y;
 }
 
 void RenderHandler::Render()
@@ -37,11 +33,11 @@ void RenderHandler::Render()
 
 	Play::GameObject& player = Play::GetGameObject( _playerHandler->GetObjectId());
 
-	int numTables = _tableHandler->GetNumTables();
+	int numTables = TableHandler::GetInstance().GetNumTables();
 
-	for(int i = 0; i < numTables; i++)
+	for (int i = 0; i < numTables; i++)
 	{
-		Table* table = _tableHandler->GetTable(i);
+		Table* table = TableHandler::GetInstance().GetTable(i);
 
 		if (objs.size() == 0)
 		{

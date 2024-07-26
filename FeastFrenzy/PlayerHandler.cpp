@@ -14,14 +14,6 @@ CharacterPlayer* PlayerHandler::GetPlayer()
 	return &_player;
 }
 
-// Sets the table handler
-void PlayerHandler::SetTableHandler(TableHandler* tableHandler)
-{
-	_tableHandler = tableHandler;
-
-	_player.SetTableHandler(_tableHandler);
-}
-
 // Creates the player
 void PlayerHandler::Create()
 {

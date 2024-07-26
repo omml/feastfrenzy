@@ -14,8 +14,6 @@
 class PlayerHandler
 {
 private:
-	TableHandler* _tableHandler;
-
 	CharacterPlayer _player;
 
 public:
@@ -25,8 +23,6 @@ public:
 	CharacterPlayer* GetPlayer();
 
 	void Create();
-
-	void SetTableHandler(TableHandler* tableHandler);
 
 	void Display();
 

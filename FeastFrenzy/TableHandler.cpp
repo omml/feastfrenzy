@@ -19,6 +19,12 @@ TableHandler::TableHandler()
 	_foodHandler = nullptr;
 }
 
+// To implement Singleton pattern
+TableHandler& TableHandler::GetInstance() {
+	static TableHandler instance;
+	return instance;
+}
+
 // Sets the food handler to pass references of food to the enemies
 void TableHandler::SetFoodHandler(FoodHandler* foodHandler)
 {
