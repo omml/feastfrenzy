@@ -8,15 +8,8 @@
 #include "Play.h"
 #include "FoodHandler.h"
 #include "SpritesDefinitions.h"
-#include "PlayerHandler.h"
 
 FoodHandler::FoodHandler() {}
-
-// Sets a reference to the player handler so later a reference to player can be set
-void FoodHandler::SetPlayerHandler(PlayerHandler* playerHandle)
-{
-	_playerHandler = playerHandle;
-}
 
 // Returns a pointer to a food item to be associated with an enemy
 Food* FoodHandler::GetFood(int index)
@@ -36,8 +29,6 @@ void FoodHandler::Create(ObjectDirection dir)
 		r = Play::RandomRollRange(f_bk_n, f_tm_n);
 		// Creates the game object
 		_food[i] = Food(goType, r, -100.0f, -100.0f, "f", 25, 0.75f, 0.0f, i, dir*4 );
-		// Sets the player
-		_food[i].SetPlayer(_playerHandler->GetPlayer());
 	}
 }
 

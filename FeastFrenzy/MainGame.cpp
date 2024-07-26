@@ -13,7 +13,7 @@
 #include "CommonDefinitions.h"
 #include "FileNamesHolder.h"
 #include "MainGameObject.h"
-#include "PlayerHandler.h"
+#include "CharacterPlayer.h"
 #include "EnemyHandler.h"
 #include "FoodHandler.h"
 #include "ScoreHolder.h"
@@ -37,8 +37,6 @@ GameState gameState;
 MainGameObject background;
 // Table rows at bottom
 MainGameObject bottomTables;
-// Player handler
-PlayerHandler playerHandler;
 // Enemy handler for left screen enemies
 EnemyHandler enemyHandlerLeft;
 // Food handler for left screen enemies
@@ -123,7 +121,7 @@ void DisplayFourthScreen()
 
 void DisplayInstructions()
 {
-	string s = FileNamesHolder::foodNames[playerHandler.GetHealthFood()];
+	string s = FileNamesHolder::foodNames[CharacterPlayer::GetInstance().GetHealthFood()];
 	// Displays instructions
 	Play::DrawFontText("40px", "Press ARROW keys to MOVE UP, DOWN, LEFT, RIGHT", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 100 }, Play::CENTRE);
 	Play::DrawFontText("40px", "Press SPACE to CATCH and THROW", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 20 }, Play::CENTRE);
@@ -185,7 +183,7 @@ void ReStartGame()
 	ScoreHolder::GetInstance().ReStart();
 	enemyHandlerLeft.ReStart();
 	enemyHandlerRight.ReStart();
-	playerHandler.ReStart();
+	CharacterPlayer::GetInstance().ReStart();
 	background.SetSprite(main_gui, 0.0f);
 	DifficultyHandler::GetInstance().ReStart();
 	TableHandler::GetInstance().ReStart();
@@ -269,11 +267,8 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	HealthBar::GetInstance().Create();
 
 	// Creates the player
-	playerHandler.Create();
+	CharacterPlayer::GetInstance().Create();
 
-	// Pass a reference of the player handler so when food items are created
-	// they have a reference of the player if the player catches food
-	foodHandlerLeft.SetPlayerHandler(&playerHandler);
 	// Food is created before so it can be assigned to an enemy
 	foodHandlerLeft.Create(DIRECTION_LEFT);
 	// Pass a reference of the food handler so when enemies are created 
@@ -282,9 +277,6 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	// Create enemies that appear on the left of the screen
 	enemyHandlerLeft.Create(DIRECTION_LEFT);
 
-	// Pass a reference of the player handler so when food items are created
-	// they have a reference of the player if the player catches food
-	foodHandlerRight.SetPlayerHandler(&playerHandler);
 	// Food is created before so it can be assigned to an enemy
 	foodHandlerRight.Create(DIRECTION_RIGHT);
 	// Pass a reference of the food handler so when enemies are created 
@@ -295,9 +287,6 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 
 	// Create tables
 	TableHandler::GetInstance().Create(150.f, 1125.0f, 128.0f, 475.f);
-
-	// Set render handler
-	renderHandler.SetPlayerHandler(&playerHandler);
 }
 
 

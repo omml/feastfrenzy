@@ -7,18 +7,14 @@
 #pragma once
 #include <vector>
 #include "MainGameObject.h"
-#include "PlayerHandler.h"
 
 class RenderHandler
 {
 private:
-	PlayerHandler* _playerHandler;
-
 	//bool CompareY(MainGameObject* a, MainGameObject* b);
 
 public:
 	RenderHandler();
-	void SetPlayerHandler(PlayerHandler* p);
 	void Render();
 };
 

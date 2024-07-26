@@ -18,7 +18,6 @@ Food::Food() : MainGameObject()
 	_offset = 0;
 	_state = FOOD_CARRIED_ENEMY;
 	_enemy = nullptr;
-	_player = nullptr;
 }
 
 Food::Food(GameObjectType go_type, int sprite, float posX, float posY, const char name[], int colRad, float scale, float animSpeed, int offset, int dirOffset) :
@@ -28,7 +27,6 @@ Food::Food(GameObjectType go_type, int sprite, float posX, float posY, const cha
 	_directionOffset = dirOffset;
 	_state = FOOD_CARRIED_ENEMY;
 	_enemy = nullptr;
-	_player = nullptr;
 
 	// Check if food is cake
 	if (sprite == f_bk_n)
@@ -98,12 +96,6 @@ void Food::SetEnemy(CharacterEnemy* enemy)
 	_enemy = enemy;
 }
 
-// Sets refence to the player in case player catches the food
-void Food::SetPlayer(CharacterPlayer* player)
-{
-	_player = player;
-}
-
 // Displays the food on top of the character depending on character's direction
 void Food::DisplayCarriedPosition()
 {
@@ -137,7 +129,7 @@ void Food::DisplayCarriedPosition()
 		posX = player.pos.x;
 		posY = player.pos.y;
 
-		dir = _player->GetCurrentDirection();
+		dir = CharacterPlayer::GetInstance().GetCurrentDirection();
 	}
 
 	// Depending on holders direction, position the food over the head
@@ -285,8 +277,8 @@ void Food::Animate()
 		if (IsCollidingWithPlayer())
 		{
 			// Food collided with player, check if player pressed space bar to catch
-			PlayerAnimationState playerAnimState = _player->GetAnimationState();
-			if (_player->GetCatch() == false && (playerAnimState == PLAYER_STATE_PREPARE_CATCH || playerAnimState == PLAYER_STATE_CATCH))
+			PlayerAnimationState playerAnimState = CharacterPlayer::GetInstance().GetAnimationState();
+			if (CharacterPlayer::GetInstance().GetCatch() == false && (playerAnimState == PLAYER_STATE_PREPARE_CATCH || playerAnimState == PLAYER_STATE_CATCH))
 			{
 				// Food was catched, stop movement
 				DisplayStop();
@@ -295,7 +287,7 @@ void Food::Animate()
 
 				// Tell the player it catched food and set a reference to it
 				// so later player can throw it
-				_player->SetCatch(true, this);
+				CharacterPlayer::GetInstance().SetCatch(true, this);
 			}
 			else
 			{

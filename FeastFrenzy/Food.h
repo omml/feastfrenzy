@@ -27,7 +27,6 @@ protected:
 	int _foodIndex = -1;
 
 	CharacterEnemy* _enemy;
-	CharacterPlayer* _player;
 
 	bool _isCake;
 
@@ -38,8 +37,6 @@ public:
 	
 	// Sets reference to the enemy is carrying the food
 	void SetEnemy(CharacterEnemy* enemy);
-	// Sets refence to the player in case player catches the food
-	void SetPlayer(CharacterPlayer* player);
 	// Displays the food on top of the character depending on character's direction
 	void DisplayCarriedPosition();
 	// Throws the food, changes the food state, this function

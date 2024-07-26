@@ -25,9 +25,13 @@ private:
 
 	bool _ateFood = false;
 public:
+	static CharacterPlayer& GetInstance();
+
 	CharacterPlayer();
 
 	CharacterPlayer(GameObjectType go_type, int sprite, float posX, float posY, const char name[], int colRad, float scale, float animSpeed);
+
+	void Create();
 
 	void CheckPlayingArea();
 
@@ -53,5 +57,8 @@ public:
 
 	void SetHelathFood();
 	int GetHealthFood();
+private:
+	CharacterPlayer(const CharacterPlayer&) = delete;
+	void operator=(const CharacterPlayer&) = delete;
 };
 #endif

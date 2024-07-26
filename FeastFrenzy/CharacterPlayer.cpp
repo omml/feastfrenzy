@@ -12,12 +12,22 @@
 #include "FileNamesHolder.h"
 #include "HealthBar.h"
 
-CharacterPlayer::CharacterPlayer()
+CharacterPlayer::CharacterPlayer() : 
+	Character(TYPE_BOY_P, boy1_wd_8, 300, 300, "boy", 10, 0.5f, 0.0f)
 {
+	
 	_catched = false;
-	_colliderId = -1;
 	_colliderYOffset = 50;
+	_colliderId = Play::CreateGameObject(TYPE_PLAYER_COLLIDER, { 300, 300 + _colliderYOffset }, 15, FileNamesHolder::fileNames[playercollider]);
 	_food = nullptr;
+
+	SetHelathFood();
+}
+
+// To implement Singleton pattern
+CharacterPlayer& CharacterPlayer::GetInstance() {
+	static CharacterPlayer instance;
+	return instance;
 }
 
 CharacterPlayer::CharacterPlayer(GameObjectType go_type, int sprite, float posX, float posY, const char name[], int colRad, float scale, float animSpeed) :
@@ -32,6 +42,15 @@ CharacterPlayer::CharacterPlayer(GameObjectType go_type, int sprite, float posX,
 	_food = nullptr;
 
 	SetHelathFood();
+}
+
+void CharacterPlayer::Create()
+{
+	// Set the sprites 
+	SetWalkSprites(boy1_wu_8, boy1_wd_8, boy1_wl_8, boy1_wr_8, 3.5f, 0.5f);
+	SetWalkHoldSprites(boy1_wuh_8, boy1_wdh_8, boy1_wlh_8, boy1_wrh_8, 3.5f, 0.5f);
+	SetThrowSprites(boy1_pu_3, boy1_pd_3, boy1_pl_3, boy1_pr_3, 0.1f);
+	SetCatchSprites(boy1_cu_3, boy1_cd_3, boy1_cl_3, boy1_cr_3, 0.1f);
 }
 
 // Function to get user input

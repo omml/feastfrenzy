@@ -16,16 +16,12 @@ class Food;
 // Class to create the food
 class FoodHandler
 {
-private:
-	PlayerHandler* _playerHandler;
 
 public:
 	Food _food[NUM_ENEMIES];
 
 	FoodHandler();
 
-	void SetPlayerHandler(PlayerHandler* playerHandle);
-	
 	Food* GetFood(int index);
 	
 	void Create(ObjectDirection dir);

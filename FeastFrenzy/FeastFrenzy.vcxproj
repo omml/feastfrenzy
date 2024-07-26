@@ -204,7 +204,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="MainGameObject.cpp" />
-    <ClCompile Include="PlayerHandler.cpp" />
     <ClCompile Include="RenderHandler.cpp" />
     <ClCompile Include="ScoreHolder.cpp" />
     <ClCompile Include="Splat.cpp" />
@@ -224,7 +223,6 @@
     <ClInclude Include="FoodHandler.h" />
     <ClInclude Include="HealthBar.h" />
     <ClInclude Include="MainGameObject.h" />
-    <ClInclude Include="PlayerHandler.h" />
     <ClInclude Include="RenderHandler.h" />
     <ClInclude Include="ScoreHolder.h" />
     <ClInclude Include="Splat.h" />
