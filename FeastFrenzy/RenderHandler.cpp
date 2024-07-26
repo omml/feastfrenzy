@@ -7,16 +7,11 @@
 
 #include <algorithm>
 #include "RenderHandler.h"
-#include "PlayerHandler.h"
+#include "CharacterPlayer.h"
 #include "TableHandler.h"
 
 RenderHandler::RenderHandler()
 {}
-
-void RenderHandler::SetPlayerHandler(PlayerHandler* p)
-{
-	_playerHandler = p;
-}
 
 // Comparator to compare objects by y position in decreasing order
 bool CompareY(MainGameObject* a, MainGameObject* b)
@@ -31,7 +26,7 @@ void RenderHandler::Render()
 {
 	std::vector<MainGameObject*> objs;
 
-	Play::GameObject& player = Play::GetGameObject( _playerHandler->GetObjectId());
+	Play::GameObject& player = Play::GetGameObject( CharacterPlayer::GetInstance().GetObjectId());
 
 	int numTables = TableHandler::GetInstance().GetNumTables();
 
@@ -58,7 +53,7 @@ void RenderHandler::Render()
 
 			if (player.pos.y > ro.pos.y)
 			{
-				_playerHandler->Display();
+				CharacterPlayer::GetInstance().HandlePlayerControls();
 				wasPlayerRendered = true;
 			}
 
@@ -67,7 +62,8 @@ void RenderHandler::Render()
 
 		if (wasPlayerRendered == false)
 		{
-			_playerHandler->Display();
+			CharacterPlayer::GetInstance().HandlePlayerControls();
 		}
 	}
+	
 }
