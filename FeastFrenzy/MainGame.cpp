@@ -150,13 +150,15 @@ void DisplayInGameGUI()
 		// Update every game object
 		renderHandler.Render();
 		enemyHandlerLeft.Display();
-		foodHandlerLeft.Display();
 		enemyHandlerRight.Display();
-		foodHandlerRight.Display();
 		HealthBar::GetInstance().Display();
 
 		// Display bottom tables
 		bottomTables.Display();
+
+		// Display food or splash
+		foodHandlerRight.Display();
+		foodHandlerLeft.Display();
 		
 		// Display score, level and text on top of the screen
 		Play::DrawFontText("40px", "TAB: Help", { 0, DISPLAY_HEIGHT - 40 }, Play::LEFT);
