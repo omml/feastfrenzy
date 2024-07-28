@@ -285,6 +285,11 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	// Create enemies that appear on the left of the screen
 	enemyHandlerRight.Create(DIRECTION_RIGHT);
 
+	// Sets Enemies that are on the oposite side of the screen so collision testing can be done just
+	// against them
+	foodHandlerLeft.SetOppositeCollisionObjs(&enemyHandlerRight);
+	foodHandlerRight.SetOppositeCollisionObjs(&enemyHandlerLeft);
+
 	// Create tables
 	TableHandler::GetInstance().Create(150.f, 1125.0f, 128.0f, 475.f);
 }

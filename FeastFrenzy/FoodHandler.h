@@ -9,6 +9,7 @@
 #define FOODHANDLER_H
 
 #include "Food.h"
+#include "EnemyHandler.h"
 
 class PlayerHandler;
 class Food;
@@ -27,5 +28,7 @@ public:
 	void Create(ObjectDirection dir);
 	
 	void Display();
+
+	void SetOppositeCollisionObjs(EnemyHandler* enemyHandler);
 };
 #endif

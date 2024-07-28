@@ -40,3 +40,23 @@ void FoodHandler::Display()
 		_food[i].Animate();
 	}
 }
+
+// Sets Enemies that are on the oposite side of the screen so collision testing can be done just
+// against them
+void FoodHandler::SetOppositeCollisionObjs(EnemyHandler* enemyHandler)
+{
+	CharacterEnemy* enemy;
+	int enemyId;
+
+	for (int i = 0; i < NUM_ENEMIES; i++)
+	{
+		enemy = enemyHandler->GetEnemy(i);
+
+		enemyId = enemy->GetObjectId();
+
+		for (int j = 0; j < NUM_ENEMIES; j++)
+		{
+			_food[j].SetOppositeCollisionObj(enemyId);
+		}
+	}
+}

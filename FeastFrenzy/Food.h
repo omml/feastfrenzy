@@ -10,6 +10,7 @@
 
 #include "MainGameObject.h"
 #include "ScoreHolder.h"
+#include <vector>
 
 class CharacterEnemy;
 class CharacterPlayer;
@@ -29,6 +30,8 @@ protected:
 	CharacterEnemy* _enemy;
 
 	bool _isCake;
+
+	std::vector<int> _oppositeCollisionObj;
 
 public:
 	Food();
@@ -58,6 +61,8 @@ public:
 	bool IsCake();
 	void SetIdle();
 	int GetFoodIndex();
+
+	void SetOppositeCollisionObj(int id);
 
 };
 #endif

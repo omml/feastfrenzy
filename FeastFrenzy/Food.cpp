@@ -47,6 +47,12 @@ int Food::GetFoodIndex()
 	return _foodIndex;
 }
 
+// Set enemies that are opposite, so colliosion are tested against them
+void Food::SetOppositeCollisionObj(int id)
+{
+	_oppositeCollisionObj.push_back(id);
+}
+
 // Returns food's state
 FoodState Food::GetState()
 {
@@ -236,19 +242,16 @@ bool Food::IsCollidingWithEnemies()
 
 	Play::GameObject& food = Play::GetGameObject(_gameObjectId);
 
-	// Loop trough all players 
-	for (int i = TYPE_ENEMY_START; i < TYPE_ENEMY_END; i++)
-	{
-		if (i != enemyGameObjectType)
-		{
-			Play::GameObject& enemy = Play::GetGameObjectByType(i);
+	int limit = DifficultyHandler::GetInstance().GetNumEnemies();
 
-			//check if the food and the enemy are colliding
-			if (Play::IsColliding(food, enemy))
-			{
-				retVal = true;
-				break;
-			}
+	for (int i = 0; i < limit; i++)
+	{
+		Play::GameObject& enemy = Play::GetGameObject(_oppositeCollisionObj[i]);
+
+		if (Play::IsColliding(food, enemy))
+		{
+			retVal = true;
+			break;
 		}
 	}
 
