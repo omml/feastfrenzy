@@ -35,10 +35,10 @@ void DifficultyHandler::CheckDifficulty()
 	switch (_level)
 	{
 	case LEVEL01:
-		threshold = 2;
+		threshold = 10;
 		break;
 	case LEVEL02:
-		threshold = 10;
+		threshold = 20;
 		break;
 	case LEVEL03:
 		threshold = 30;
