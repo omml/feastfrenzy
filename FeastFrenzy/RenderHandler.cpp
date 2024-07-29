@@ -13,6 +13,12 @@
 RenderHandler::RenderHandler()
 {}
 
+// To implement Singleton pattern
+RenderHandler& RenderHandler::GetInstance() {
+	static RenderHandler instance;
+	return instance;
+}
+
 // Comparator to compare objects by y position in decreasing order
 bool CompareY(MainGameObject* a, MainGameObject* b)
 {
@@ -22,48 +28,68 @@ bool CompareY(MainGameObject* a, MainGameObject* b)
 	return aObj.pos.y >= bObj.pos.y;
 }
 
+// Initialize the render handler
+void RenderHandler::Initialise()
+{
+	_objs.clear();
+
+	AddTableObject();
+}
+
+// Restart the render handler
+void RenderHandler::ReStart()
+{
+	_objs.clear();
+
+	AddTableObject();
+}
+
+// Update the render handler
+void RenderHandler::Update()
+{
+	AddTableObject();
+}
+
+// Add a table to the render objects
+void RenderHandler::AddTableObject()
+{
+	if (_objs.size() < NUM_TABLES)
+	{
+		Table* table = TableHandler::GetInstance().GetTable(_objs.size());
+
+		auto it = std::lower_bound(_objs.begin(), _objs.end(), table, CompareY);
+
+		// Insert the object at the correct position
+		_objs.insert(it, table);
+	}
+}
+
+// Render objects in order, first objects that have a larger y value
 void RenderHandler::Render()
 {
-	std::vector<MainGameObject*> objs;
+	bool wasPlayerRendered = false;
+	Play::GameObject& player = Play::GetGameObject(CharacterPlayer::GetInstance().GetObjectId());
 
-	Play::GameObject& player = Play::GetGameObject( CharacterPlayer::GetInstance().GetObjectId());
-
-	int numTables = TableHandler::GetInstance().GetNumTables();
+	int numTables = _objs.size();
 
 	for (int i = 0; i < numTables; i++)
 	{
-		Table* table = TableHandler::GetInstance().GetTable(i);
+		Play::GameObject& ro = Play::GetGameObject(_objs[i]->GetObjectId());
 
-		if (objs.size() == 0)
+		if (wasPlayerRendered == false)
 		{
-			objs.push_back(table);
-		}
-		else
-		{
-			auto it = std::lower_bound(objs.begin(), objs.end(), table, CompareY);
-
-			// Insert the object at the correct position
-			objs.insert(it, table);
-		}
-
-		bool wasPlayerRendered = false;
-		for (int j = 0; j < objs.size(); j++)
-		{
-			Play::GameObject& ro = Play::GetGameObject(objs[j]->GetObjectId());
-
 			if (player.pos.y > ro.pos.y)
 			{
 				CharacterPlayer::GetInstance().HandlePlayerControls();
 				wasPlayerRendered = true;
 			}
-
-			objs[j]->Display();
 		}
 
-		if (wasPlayerRendered == false)
-		{
-			CharacterPlayer::GetInstance().HandlePlayerControls();
-		}
+		_objs[i]->Display();
 	}
-	
+
+	if (wasPlayerRendered == false)
+	{
+		CharacterPlayer::GetInstance().HandlePlayerControls();
+	}
 }

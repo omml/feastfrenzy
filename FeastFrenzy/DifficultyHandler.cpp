@@ -5,8 +5,7 @@
 //  Created by Oscar Martinez on 11/Jul/2024.
 //
 #include "DifficultyHandler.h"
-
-
+#include "RenderHandler.h"
 
 DifficultyHandler::DifficultyHandler()
 {
@@ -58,6 +57,8 @@ void DifficultyHandler::CheckDifficulty()
 	if (ScoreHolder::GetInstance().GetScore() >= threshold)
 	{
 		_level = (DifficultyLevel)((int)_level + 1);
+
+		RenderHandler::GetInstance().Update();
 	}
 }
 

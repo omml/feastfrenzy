@@ -11,10 +11,18 @@
 class RenderHandler
 {
 private:
-	//bool CompareY(MainGameObject* a, MainGameObject* b);
+	std::vector<MainGameObject*> _objs;
+	void AddTableObject();
 
 public:
+	static RenderHandler& GetInstance();
 	RenderHandler();
+	void Initialise();
+	void ReStart();
 	void Render();
+	void Update();
+private:
+	RenderHandler(const RenderHandler&) = delete;
+	void operator=(const RenderHandler&) = delete;
 };
 
